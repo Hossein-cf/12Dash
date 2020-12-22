@@ -2,7 +2,10 @@ package com.example.a12dash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,5 +13,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button btnSinglePlayer = findViewById(R.id.btnSinglePlayer);
+        Button btnMultiPlayer = findViewById(R.id.btnMultiplayer);
+        Button btnClose = findViewById(R.id.btnExit);
+        btnSinglePlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), activity_fill_information.class);
+                i.putExtra("Game_Type","SinglePlayer");
+                startActivity(i);
+            }
+        });
+        btnMultiPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), activity_fill_information.class);
+                i.putExtra("Game_Type","MultiPlayer");
+                startActivity(i);
+            }
+        });
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.exit(0);
+            }
+        });
+
     }
+
 }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">12Dash</string>
+    <string name="exit">Exit</string>
+    <string name="singleplayer">SinglePlayer</string>
+    <string name="multiplayer">Multiplayer</string>
+    <string name="first">first</string>
+    <string name="firstplayer">FirstPlayer</string>
 </resources>
