@@ -4,16 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BBDEE4"
     tools:context=".MainActivity">
 
     <TextView
 
         android:id="@+id/textView"
-        android:layout_width="132dp"
-        android:layout_height="28dp"
+        android:layout_width="227dp"
+        android:layout_height="64dp"
+        android:autoLink="none"
+        android:editable="false"
+        android:enabled="false"
+        android:linksClickable="false"
         android:text=" 12 DASH GAME"
         android:textAlignment="center"
-        android:textColor="#190B0B"
+        android:textColor="#374D83"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/btnSinglePlayer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -23,9 +29,10 @@
 
     <Button
         android:id="@+id/btnMultiplayer"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
+        android:layout_width="265dp"
+        android:layout_height="67dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="#374D83"
         android:text="@string/multiplayer"
         app:layout_constraintBottom_toTopOf="@+id/btnExit"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,19 +40,22 @@
 
     <Button
         android:id="@+id/btnSinglePlayer"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_width="263dp"
+        android:layout_height="69dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#374D83"
         android:text="@string/singleplayer"
         app:layout_constraintBottom_toTopOf="@+id/btnMultiplayer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnExit"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
+        android:layout_width="266dp"
+        android:layout_height="63dp"
         android:layout_marginBottom="340dp"
+        android:backgroundTint="#374D83"
         android:text="@string/exit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
