@@ -7,6 +7,7 @@
     tools:context=".testActivity">
 
     <FrameLayout
+        android:id="@+id/frameLayout2"
         android:layout_width="980px"
         android:layout_height="630px"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -312,7 +313,7 @@
                 android:layout_marginLeft="18px"
                 android:layout_marginTop="50px"
                 android:background="?android:attr/listDivider"
-                android:backgroundTint="#090808"/>
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider0_6"
@@ -321,7 +322,7 @@
                 android:layout_marginLeft="955px"
                 android:layout_marginTop="50px"
                 android:background="?android:attr/listDivider"
-                android:backgroundTint="#090808"/>
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider17"
@@ -329,8 +330,8 @@
                 android:layout_height="70dp"
                 android:layout_marginLeft="856px"
                 android:layout_marginTop="115px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider26"
@@ -338,8 +339,8 @@
                 android:layout_height="17dp"
                 android:layout_marginLeft="485px"
                 android:layout_marginTop="115px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider28"
@@ -347,8 +348,8 @@
                 android:layout_height="15dp"
                 android:layout_marginLeft="485px"
                 android:layout_marginTop="470px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider29"
@@ -356,8 +357,8 @@
                 android:layout_height="15dp"
                 android:layout_marginLeft="485px"
                 android:layout_marginTop="542px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider27"
@@ -365,8 +366,8 @@
                 android:layout_height="12dp"
                 android:layout_marginLeft="485px"
                 android:layout_marginTop="50px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider21"
@@ -374,8 +375,8 @@
                 android:layout_height="42dp"
                 android:layout_marginLeft="756px"
                 android:layout_marginTop="190px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider25"
@@ -383,8 +384,8 @@
                 android:layout_height="42dp"
                 android:layout_marginLeft="215px"
                 android:layout_marginTop="190px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider22"
@@ -392,8 +393,8 @@
                 android:layout_height="42dp"
                 android:layout_marginLeft="756px"
                 android:layout_marginTop="330px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider23"
@@ -401,8 +402,8 @@
                 android:layout_height="42dp"
                 android:layout_marginLeft="215px"
                 android:layout_marginTop="330px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider24"
@@ -410,8 +411,8 @@
                 android:layout_height="42dp"
                 android:layout_marginLeft="756px"
                 android:layout_marginTop="330px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider20"
@@ -419,8 +420,8 @@
                 android:layout_height="70dp"
                 android:layout_marginLeft="116px"
                 android:layout_marginTop="115px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider18"
@@ -428,8 +429,8 @@
                 android:layout_height="70dp"
                 android:layout_marginLeft="856px"
                 android:layout_marginTop="330px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider19"
@@ -437,8 +438,8 @@
                 android:layout_height="70dp"
                 android:layout_marginLeft="116px"
                 android:layout_marginTop="330px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider6"
@@ -446,8 +447,8 @@
                 android:layout_height="95dp"
                 android:layout_marginLeft="18px"
                 android:layout_marginTop="335px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider8"
@@ -455,8 +456,8 @@
                 android:layout_height="95dp"
                 android:layout_marginLeft="955px"
                 android:layout_marginTop="335px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider9"
@@ -464,8 +465,8 @@
                 android:layout_height="5px"
                 android:layout_marginLeft="135px"
                 android:layout_marginTop="100px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider10"
@@ -473,8 +474,8 @@
                 android:layout_height="5px"
                 android:layout_marginLeft="510px"
                 android:layout_marginTop="100px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider15"
@@ -482,8 +483,8 @@
                 android:layout_height="5px"
                 android:layout_marginLeft="510px"
                 android:layout_marginTop="530px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider16"
@@ -491,8 +492,8 @@
                 android:layout_height="5px"
                 android:layout_marginLeft="135px"
                 android:layout_marginTop="530px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider11"
@@ -500,8 +501,8 @@
                 android:layout_height="5px"
                 android:layout_marginLeft="510px"
                 android:layout_marginTop="175px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider14"
@@ -509,8 +510,8 @@
                 android:layout_height="5px"
                 android:layout_marginLeft="510px"
                 android:layout_marginTop="457px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider12"
@@ -518,8 +519,8 @@
                 android:layout_height="5px"
                 android:layout_marginLeft="240px"
                 android:layout_marginTop="175px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
 
             <View
                 android:id="@+id/divider13"
@@ -527,11 +528,133 @@
                 android:layout_height="5px"
                 android:layout_marginLeft="240px"
                 android:layout_marginTop="457px"
-                android:backgroundTint="#090808"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider34"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="15px"
+                android:layout_marginTop="66px"
+                android:background="?android:attr/listDivider"
+                android:rotation="35" />
+
+            <View
+                android:id="@+id/divider35"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="125px"
+                android:layout_marginTop="143px"
+                android:background="?android:attr/listDivider"
+                android:rotation="35" />
+
+            <View
+                android:id="@+id/divider36"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="750px"
+                android:layout_marginTop="486px"
+                android:background="?android:attr/listDivider"
+                android:rotation="35" />
+
+            <View
+                android:id="@+id/divider38"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="760px"
+                android:layout_marginTop="140px"
+                android:background="?android:attr/listDivider"
+                android:rotation="-39" />
+
+            <View
+                android:id="@+id/divider39"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="760px"
+                android:layout_marginTop="138px"
+                android:background="?android:attr/listDivider"
+                android:rotation="-35" />
+
+            <View
+                android:id="@+id/divider41"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="125px"
+                android:layout_marginTop="486px"
+                android:background="?android:attr/listDivider"
+                android:rotation="-35" />
+
+            <View
+                android:id="@+id/divider42"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="15px"
+                android:layout_marginTop="566px"
+                android:background="?android:attr/listDivider"
+                android:rotation="-35" />
+
+            <View
+                android:id="@+id/divider40"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="870px"
+                android:layout_marginTop="60px"
+                android:background="?android:attr/listDivider"
+                android:rotation="-35" />
+
+            <View
+                android:id="@+id/divider37"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="860px"
+                android:layout_marginTop="566px"
+                android:background="?android:attr/listDivider"
+                android:rotation="35" />
 
         </FrameLayout>
 
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="106dp"
+        android:layout_height="331dp"
+        android:layout_marginLeft="5dp"
+        android:background="#C19696"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/frameLayout2"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="17dp"
+            android:text="Player one" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="106dp"
+        android:layout_height="331dp"
+        android:layout_marginEnd="5dp"
+        android:background="#C19696"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintStart_toEndOf="@+id/frameLayout2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="17dp"
+            android:text="Player Two" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
