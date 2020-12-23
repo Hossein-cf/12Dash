@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         btnSinglePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), activity_fill_information.class);
+                Intent i = new Intent(getApplicationContext(),activity_fill_information.class);
                 i.putExtra("Game_Type","SinglePlayer");
                 startActivity(i);
             }

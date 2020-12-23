@@ -5,4 +5,5 @@
     <string name="multiplayer">Multiplayer</string>
     <string name="first">first</string>
     <string name="firstplayer">FirstPlayer</string>
+    <string name="second">Second</string>
 </resources>
