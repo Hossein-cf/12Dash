@@ -6,9 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 public class activity_fill_information extends AppCompatActivity {
@@ -31,7 +29,7 @@ public class activity_fill_information extends AppCompatActivity {
 
 
         Bundle b = getIntent().getExtras();
-        TextView txtName = findViewById(R.id.txtxName1);
+        TextView txtName = findViewById(R.id.txtxNameFirst);
         String GameType = b.get("Game_Type").toString();
         System.out.println(GameType);
         if (GameType.equals("SinglePlayer")) {

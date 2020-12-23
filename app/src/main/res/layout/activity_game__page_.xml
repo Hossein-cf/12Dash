@@ -6,6 +6,668 @@
     android:layout_height="match_parent"
     tools:context=".Game_Page_Activity">
 
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="728dp"
+        android:layout_height="408dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/uyhguh"
+            android:layout_width="280px"
+            android:layout_height="800px"
+            android:layout_marginStart="100px"
+            android:layout_marginTop="140px"
+            android:layout_marginBottom="100px"
+            android:background="#C19696">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="17dp"
+                android:text="Player Two" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="980px"
+            android:layout_height="630px"
+            android:layout_marginLeft="470px"
+            android:layout_marginTop="225px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/btn4_3"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="470px"
+                android:layout_marginTop="425px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn0_3"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="470px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn2_3"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="470px"
+                android:layout_marginTop="145px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn5_3"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="470px"
+                android:layout_marginTop="495px"
+                android:layout_marginBottom="70px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn1_3"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="470px"
+                android:layout_marginTop="70px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn6_3"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="470px"
+                android:layout_marginTop="570px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn0_0"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn3_0"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="285px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn3_1"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="100px"
+                android:layout_marginTop="285px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn5_1"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="100px"
+                android:layout_marginTop="495px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn1_1"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="100px"
+                android:layout_marginTop="70px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn3_2"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="200px"
+                android:layout_marginTop="285px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn4_2"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="200px"
+                android:layout_marginTop="425px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn2_2"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="200px"
+                android:layout_marginTop="145px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn6_0"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="570px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn0_6"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="940px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn6_6"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="940px"
+                android:layout_marginTop="570px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn3_6"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="940px"
+                android:layout_marginTop="285px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn3_4"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="740px"
+                android:layout_marginTop="285px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn4_4"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="740px"
+                android:layout_marginTop="425px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn2_4"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="740px"
+                android:layout_marginTop="145px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn3_5"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="840px"
+                android:layout_marginTop="285px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn5_5"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="840px"
+                android:layout_marginTop="495px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <Button
+                android:id="@+id/btn1_5"
+                android:layout_width="15dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="840px"
+                android:layout_marginTop="70px"
+                android:text="Button"
+                app:cornerRadius="200px" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="164dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="30px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="164dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="40px"
+                android:layout_marginTop="600px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="164dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="510px"
+                android:layout_marginTop="30px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider30"
+                android:layout_width="60px"
+                android:layout_height="5px"
+                android:layout_marginLeft="775px"
+                android:layout_marginTop="315px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider31"
+                android:layout_width="60px"
+                android:layout_height="5px"
+                android:layout_marginLeft="878px"
+                android:layout_marginTop="315px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider32"
+                android:layout_width="60px"
+                android:layout_height="5px"
+                android:layout_marginLeft="39px"
+                android:layout_marginTop="315px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider33"
+                android:layout_width="60px"
+                android:layout_height="5px"
+                android:layout_marginLeft="136px"
+                android:layout_marginTop="315px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="164dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="510px"
+                android:layout_marginTop="600px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="5px"
+                android:layout_height="95dp"
+                android:layout_marginLeft="18px"
+                android:layout_marginTop="50px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider0_6"
+                android:layout_width="5px"
+                android:layout_height="95dp"
+                android:layout_marginLeft="955px"
+                android:layout_marginTop="50px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider17"
+                android:layout_width="5px"
+                android:layout_height="70dp"
+                android:layout_marginLeft="856px"
+                android:layout_marginTop="115px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider26"
+                android:layout_width="5px"
+                android:layout_height="17dp"
+                android:layout_marginLeft="485px"
+                android:layout_marginTop="115px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider28"
+                android:layout_width="5px"
+                android:layout_height="15dp"
+                android:layout_marginLeft="485px"
+                android:layout_marginTop="470px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider29"
+                android:layout_width="5px"
+                android:layout_height="15dp"
+                android:layout_marginLeft="485px"
+                android:layout_marginTop="542px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider27"
+                android:layout_width="5px"
+                android:layout_height="12dp"
+                android:layout_marginLeft="485px"
+                android:layout_marginTop="50px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider21"
+                android:layout_width="5px"
+                android:layout_height="42dp"
+                android:layout_marginLeft="756px"
+                android:layout_marginTop="190px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider25"
+                android:layout_width="5px"
+                android:layout_height="42dp"
+                android:layout_marginLeft="215px"
+                android:layout_marginTop="190px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider22"
+                android:layout_width="5px"
+                android:layout_height="42dp"
+                android:layout_marginLeft="756px"
+                android:layout_marginTop="330px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider23"
+                android:layout_width="5px"
+                android:layout_height="42dp"
+                android:layout_marginLeft="215px"
+                android:layout_marginTop="330px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider24"
+                android:layout_width="5px"
+                android:layout_height="42dp"
+                android:layout_marginLeft="756px"
+                android:layout_marginTop="330px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider20"
+                android:layout_width="5px"
+                android:layout_height="70dp"
+                android:layout_marginLeft="116px"
+                android:layout_marginTop="115px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider18"
+                android:layout_width="5px"
+                android:layout_height="70dp"
+                android:layout_marginLeft="856px"
+                android:layout_marginTop="330px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider19"
+                android:layout_width="5px"
+                android:layout_height="70dp"
+                android:layout_marginLeft="116px"
+                android:layout_marginTop="330px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="5px"
+                android:layout_height="95dp"
+                android:layout_marginLeft="18px"
+                android:layout_marginTop="335px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider8"
+                android:layout_width="5px"
+                android:layout_height="95dp"
+                android:layout_marginLeft="955px"
+                android:layout_marginTop="335px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider9"
+                android:layout_width="127dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="135px"
+                android:layout_marginTop="100px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider10"
+                android:layout_width="127dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="510px"
+                android:layout_marginTop="100px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider15"
+                android:layout_width="127dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="510px"
+                android:layout_marginTop="530px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider16"
+                android:layout_width="127dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="135px"
+                android:layout_marginTop="530px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider11"
+                android:layout_width="87dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="510px"
+                android:layout_marginTop="175px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider14"
+                android:layout_width="87dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="510px"
+                android:layout_marginTop="457px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider12"
+                android:layout_width="87dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="240px"
+                android:layout_marginTop="175px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider13"
+                android:layout_width="87dp"
+                android:layout_height="5px"
+                android:layout_marginLeft="240px"
+                android:layout_marginTop="457px"
+                android:background="?android:attr/listDivider"
+                android:backgroundTint="#090808" />
+
+            <View
+                android:id="@+id/divider34"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="15px"
+                android:layout_marginTop="66px"
+                android:background="?android:attr/listDivider"
+                android:rotation="35" />
+
+            <View
+                android:id="@+id/divider35"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="125px"
+                android:layout_marginTop="143px"
+                android:background="?android:attr/listDivider"
+                android:rotation="35" />
+
+            <View
+                android:id="@+id/divider36"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="750px"
+                android:layout_marginTop="486px"
+                android:background="?android:attr/listDivider"
+                android:rotation="35" />
+
+            <View
+                android:id="@+id/divider38"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="760px"
+                android:layout_marginTop="140px"
+                android:background="?android:attr/listDivider"
+                android:rotation="-39" />
+
+            <View
+                android:id="@+id/divider39"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="760px"
+                android:layout_marginTop="138px"
+                android:background="?android:attr/listDivider"
+                android:rotation="-35" />
+
+            <View
+                android:id="@+id/divider41"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="125px"
+                android:layout_marginTop="486px"
+                android:background="?android:attr/listDivider"
+                android:rotation="-35" />
+
+            <View
+                android:id="@+id/divider42"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="15px"
+                android:layout_marginTop="566px"
+                android:background="?android:attr/listDivider"
+                android:rotation="-35" />
+
+            <View
+                android:id="@+id/divider40"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="870px"
+                android:layout_marginTop="60px"
+                android:background="?android:attr/listDivider"
+                android:rotation="-35" />
+
+            <View
+                android:id="@+id/divider37"
+                android:layout_width="100px"
+                android:layout_height="3dp"
+                android:layout_marginLeft="860px"
+                android:layout_marginTop="566px"
+                android:background="?android:attr/listDivider"
+                android:rotation="35" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/kjkj"
+            android:layout_width="280px"
+            android:layout_height="800px"
+            android:layout_marginLeft="1540px"
+            android:layout_marginTop="140px"
+            android:layout_marginBottom="100px"
+            android:background="#C19696">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="17dp"
+                android:text="Player one" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="600px"
+            android:layout_height="150px"
+            android:layout_marginStart="660px"
+            android:layout_marginTop="30px"
+            android:background="#C53939"
+            android:contextClickable="false">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="150px"
+                android:layout_height="50px"
+                android:layout_marginStart="250px"
+                android:text="result" />
+        </FrameLayout>
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

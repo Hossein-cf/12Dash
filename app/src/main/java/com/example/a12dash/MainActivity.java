@@ -3,6 +3,7 @@ package com.example.a12dash;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -15,9 +16,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
         getSupportActionBar().hide(); // hide the title bar
-
 
 
         Button btnSinglePlayer = findViewById(R.id.btnSinglePlayer);
@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         btnSinglePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),testActivity.class);
-                i.putExtra("Game_Type","SinglePlayer");
+                Intent i = new Intent(getApplicationContext(), testActivity.class);
+                i.putExtra("Game_Type", "SinglePlayer");
                 startActivity(i);
             }
         });
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), activity_fill_information.class);
-                i.putExtra("Game_Type","MultiPlayer");
+                i.putExtra("Game_Type", "MultiPlayer");
                 startActivity(i);
             }
         });

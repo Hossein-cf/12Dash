@@ -6,79 +6,61 @@
     android:layout_height="match_parent"
     tools:context=".activity_fill_information">
 
-    <EditText
-        android:id="@+id/txtxName1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="136dp"
-        android:text="@string/first"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.589"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor,MissingConstraints"
-        android:autofillHints=""
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtBane2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="148dp"
-        android:text="@string/second"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtxName1"
-        app:layout_constraintVertical_bias="0.058"
-        tools:ignore="MissingConstraints"
-        android:autofillHints="" />
+        <EditText
+            android:id="@+id/txtxNameFirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200px"
+            android:autofillHints=""
+            android:hint="First Player"
+            android:text="@string/first"
+            tools:ignore="LabelFor,MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="64dp"
-        android:text="@string/firstplayer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        <Spinner
+            android:id="@+id/spnrColorFirst"
+            android:layout_width="118dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="500px"
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="SecondPlayer"
-        app:layout_constraintEnd_toStartOf="@+id/txtBane2"
-        app:layout_constraintHorizontal_bias="0.789"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="MissingConstraints" />
+            android:layout_marginBottom="464dp"
+            android:contextClickable="false"
+            android:entries="1,2,3" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="272dp"
-        android:text="Start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.278"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.521" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="89dp"
+        tools:layout_editor_absoluteY="389dp">
 
-    <Spinner
-        android:id="@+id/spnrColor"
-        android:layout_width="118dp"
-        android:layout_height="18dp"
-        android:layout_marginBottom="464dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.665"
-        app:layout_constraintStart_toStartOf="parent"
+        <Spinner
+            android:id="@+id/spnrColorSecond"
+            android:layout_width="118dp"
+            android:layout_height="18dp"
+            android:layout_marginBottom="464dp"
 
-        app:layout_constraintVertical_bias="0.104" />
+            />
+
+        <EditText
+            android:id="@+id/txtNameSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="148dp"
+            android:autofillHints=""
+            android:hint="Second Player"
+            android:text="@string/second"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="272dp"
+            android:text="Start" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
