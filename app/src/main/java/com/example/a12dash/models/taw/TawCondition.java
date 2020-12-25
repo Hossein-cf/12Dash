@@ -1,6 +1,6 @@
 package com.example.a12dash.models.taw;
 
-enum TawCondition {
+public enum TawCondition {
     DELETED(0),
     IN_GAME(1),
     OUT_GAME(2);

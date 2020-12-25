@@ -14,7 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.a12dash.models.player.Player;
+import com.example.a12dash.models.taw.PlayGround;
+import com.example.a12dash.models.taw.Position;
+import com.example.a12dash.models.taw.Taw;
+import com.example.a12dash.models.taw.TawCondition;
+import com.example.a12dash.models.taw.TawPlace;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.TooManyListenersException;
 
@@ -22,8 +28,12 @@ public class Game_Page_Activity extends AppCompatActivity {
     private boolean flag = false;
     private int firstPlayerColor = 0, secondPlayerColor = 0;
     private String firstPlayerName, secondPlayerName, gameStarter;
-    private Player playerFirst = new Player();
-    private Player playerSecond = new Player();
+    private int firstPlayerTawIndex = 0, secondPlayerTawIndex = 0;
+    private Player playerFirst;
+    private Player playerSecond;
+    private PlayGround ground;
+    private TawPlace[][] places;
+    private int gameState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +41,12 @@ public class Game_Page_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_game__page_);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+        playerFirst = new Player();
+        playerSecond = new Player();
+        ground = new PlayGround();
+        places = ground.getTawPlaces();
+        gameState = GameState.ENTER_TAW.value;
 
         Bundle b = getIntent().getExtras();
         assert b != null;
@@ -52,22 +68,72 @@ public class Game_Page_Activity extends AppCompatActivity {
 
     public void onClick(View view) {
 
-        if (flag&& view.getTag().toString().contains("#ffadad85")) {
+        String id = view.getResources().getResourceEntryName(view.getId());
+        Position position = getTowSelectedPosition(id);
+        if (flag && view.getTag().toString().contains("#ffadad85")) {
+
 
             findViewById(view.getId()).setBackgroundColor(firstPlayerColor);
             findViewById(view.getId()).setTag(firstPlayerColor);
             flag = false;
-        } else if ( view.getTag().toString().contains("#ffadad85")){
+
+            // set condition to taw
+            playerFirst.getTawList().get(firstPlayerTawIndex).setCondition(TawCondition.IN_GAME);
+            // set place to taw
+            playerFirst.getTawList().get(firstPlayerTawIndex).setPlace(places[position.getY()][position.getX()]);
+            // set taw to play ground
+            places[position.getY()][position.getX()].setCurrentTaw(playerFirst.getTawList().get(firstPlayerTawIndex++));
+
+
+        } else if (view.getTag().toString().contains("#ffadad85")) {
             findViewById(view.getId()).setBackgroundColor(secondPlayerColor);
             findViewById(view.getId()).setTag(secondPlayerColor);
 
             flag = true;
-        }else {
-            Toast.makeText(getApplicationContext(),"choose another taw",Toast.LENGTH_SHORT).show();
+
+            // set condition to taw
+            playerSecond.getTawList().get(secondPlayerTawIndex).setCondition(TawCondition.IN_GAME);
+            // set place to taw
+            playerSecond.getTawList().get(secondPlayerTawIndex).setPlace(places[position.getY()][position.getX()]);
+            // set taw to play ground
+            places[position.getY()][position.getX()].setCurrentTaw(playerSecond.getTawList().get(secondPlayerTawIndex++));
+
+
+        } else {
+            Toast.makeText(getApplicationContext(), "choose another taw", Toast.LENGTH_SHORT).show();
         }
     }
 
+
+    public boolean checkForGoal(Position position) {
+        //TODO complete this method
+
+        return false;
+    }
+
+
+    public void autoPlay() {
+        //TODO
+    }
+
+    public void attack() {
+        //TODO
+    }
+
+    public void defend() {
+        //TODO
+    }
+
+
+    public Position getTowSelectedPosition(String id) {
+        Position position = new Position();
+        position.setX(Integer.parseInt(id.charAt(id.length() - 1) + ""));
+        position.setY(Integer.parseInt(id.charAt(id.length() - 3) + ""));
+
+        return position;
+    }
+
     public int getItemColor(View view) {
-        return (int)view.getTag();
+        return (int) view.getTag();
     }
 }

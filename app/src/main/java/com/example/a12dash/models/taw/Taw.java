@@ -8,6 +8,6 @@ import lombok.Data;
 public class Taw {
     private int id;
     private TawPlace place;
-    private TawCondition condition;
+    private TawCondition condition = TawCondition.OUT_GAME;
     private Player player;
 }
