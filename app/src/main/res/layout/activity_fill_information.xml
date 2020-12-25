@@ -4,63 +4,138 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BBDEE4"
     tools:context=".activity_fill_information">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/txtxNameFirst"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="200px"
-            android:autofillHints=""
-            android:hint="First Player"
-            android:text="@string/first"
-            tools:ignore="LabelFor,MissingConstraints" />
-
-        <Spinner
-            android:id="@+id/spnrColorFirst"
-            android:layout_width="118dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="500px"
-
-            android:layout_marginBottom="464dp"
-            android:contextClickable="false"
-            android:entries="1,2,3" />
-    </LinearLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="89dp"
-        tools:layout_editor_absoluteY="389dp">
+        android:layout_width="900px"
+        android:layout_height="1800px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <Spinner
-            android:id="@+id/spnrColorSecond"
-            android:layout_width="118dp"
-            android:layout_height="18dp"
-            android:layout_marginBottom="464dp"
 
-            />
+        <FrameLayout
+            android:layout_width="850px"
+            android:layout_height="400px"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="20px"
+            android:layout_marginRight="100px">
 
-        <EditText
-            android:id="@+id/txtNameSecond"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="148dp"
-            android:autofillHints=""
-            android:hint="Second Player"
-            android:text="@string/second"
-            tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100px"
+                android:layout_marginTop="55px"
+                android:text="First Player Name :"
+                android:textAlignment="center" />
 
-        <Button
-            android:id="@+id/btnStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="272dp"
-            android:text="Start" />
+            <EditText
+                android:layout_width="136dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="450px"
+                android:layout_marginTop="0px"></EditText>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="130px"
+                android:layout_marginTop="230px"
+                android:text="Player Color :"
+                android:textAlignment="center" />
+
+<!--            <EditText-->
+<!--                android:id="@+id/editText"-->
+<!--                android:layout_width="136dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="450px"-->
+<!--                android:layout_marginTop="200px"></EditText>-->
+            <Spinner
+                android:id="@+id/firstPlayerColor"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="400px"
+                android:layout_marginTop="190px"
+                android:autofillHints="1234"
+                android:hint="someText" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="850px"
+            android:layout_height="400px"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="450px"
+            android:layout_marginRight="20px">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60px"
+                android:layout_marginTop="55px"
+                android:text="Second Player Name :"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="136dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="450px"
+                android:layout_marginTop="0px"></EditText>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100px"
+                android:layout_marginTop="250px"
+                android:text="Player Color :"
+                android:textAlignment="center" />
+
+            <Spinner
+                android:id="@+id/secondPlayerColor"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="400px"
+                android:layout_marginTop="220px"
+                android:autofillHints="1234"
+                android:hint="someText" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="700px"
+            android:layout_height="700px"
+            android:layout_marginLeft="100px"
+            android:layout_marginTop="950px"
+            android:layout_marginRight="100px">
+
+            <Spinner
+                android:id="@+id/playersDropdown"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="140px"
+                android:layout_marginTop="100px"
+                android:autofillHints="1234"
+                android:hint="someText" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="180px"
+                android:layout_marginTop="500px"
+                android:text="Let's Play" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="170px"
+                android:text="Choose Game Starter" />
+        </FrameLayout>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

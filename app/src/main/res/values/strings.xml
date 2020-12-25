@@ -7,4 +7,16 @@
     <string name="firstplayer">FirstPlayer</string>
     <string name="second">Second</string>
     <string name="button">Button</string>
+
+
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
 </resources>
