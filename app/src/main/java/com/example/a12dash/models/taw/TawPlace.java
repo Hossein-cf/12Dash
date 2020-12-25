@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class TawPlace {
+    private Taw currentTaw ;
     private TawPlaceCondition condition;
     private Position position;
     private TawPlace top;

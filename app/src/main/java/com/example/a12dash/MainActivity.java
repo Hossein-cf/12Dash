@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
         getSupportActionBar().hide(); // hide the title bar
 
-
         Button btnSinglePlayer = findViewById(R.id.btnSinglePlayer);
         Button btnMultiPlayer = findViewById(R.id.btnMultiplayer);
         Button btnClose = findViewById(R.id.btnExit);

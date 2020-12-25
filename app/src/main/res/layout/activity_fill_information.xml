@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BBDEE4"
+    android:paddingLeft="100px"
+    android:paddingTop="70px"
     tools:context=".activity_fill_information">
 
 
@@ -14,7 +16,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.355">
 
 
         <FrameLayout
@@ -34,6 +37,7 @@
                 android:textAlignment="center" />
 
             <EditText
+                android:id="@+id/txtFirstPlayerName"
                 android:layout_width="136dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="450px"
@@ -48,12 +52,12 @@
                 android:text="Player Color :"
                 android:textAlignment="center" />
 
-<!--            <EditText-->
-<!--                android:id="@+id/editText"-->
-<!--                android:layout_width="136dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="450px"-->
-<!--                android:layout_marginTop="200px"></EditText>-->
+            <!--            <EditText-->
+            <!--                android:id="@+id/editText"-->
+            <!--                android:layout_width="136dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginLeft="450px"-->
+            <!--                android:layout_marginTop="200px"></EditText>-->
             <Spinner
                 android:id="@+id/firstPlayerColor"
                 android:layout_width="170dp"
@@ -81,7 +85,7 @@
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/txtSecondPlayerName"
                 android:layout_width="136dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="450px"
@@ -123,7 +127,7 @@
                 android:hint="someText" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnStartGame"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="180px"

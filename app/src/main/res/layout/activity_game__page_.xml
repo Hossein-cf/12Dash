@@ -49,7 +49,11 @@
                 android:layout_marginLeft="470px"
                 android:layout_marginTop="425px"
                 android:text="Button"
-                app:cornerRadius="200px" />
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
+                android:onClick="onClick"
+                app:cornerRadius="200px"
+                tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/btn0_3"
@@ -57,6 +61,9 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="470px"
                 android:text="Button"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -65,7 +72,10 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="470px"
                 android:layout_marginTop="145px"
-                android:text="Button"
+                android:text="button"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -76,6 +86,9 @@
                 android:layout_marginTop="495px"
                 android:layout_marginBottom="70px"
                 android:text="Button"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -85,6 +98,9 @@
                 android:layout_marginLeft="470px"
                 android:layout_marginTop="70px"
                 android:text="Button"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -92,7 +108,12 @@
                 android:layout_width="15dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="470px"
+
                 android:layout_marginTop="570px"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
+
+                android:onClick="onClick"
                 android:text="Button"
                 app:cornerRadius="200px" />
 
@@ -101,23 +122,32 @@
                 android:layout_width="15dp"
                 android:layout_height="25dp"
                 android:text="Button"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
                 android:id="@+id/btn3_0"
                 android:layout_width="15dp"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
                 android:layout_height="25dp"
                 android:layout_marginTop="285px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
                 android:id="@+id/btn3_1"
                 android:layout_width="15dp"
                 android:layout_height="25dp"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
                 android:layout_marginLeft="100px"
                 android:layout_marginTop="285px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -125,17 +155,24 @@
                 android:layout_width="15dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="100px"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
                 android:layout_marginTop="495px"
                 android:text="Button"
+
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
                 android:id="@+id/btn1_1"
                 android:layout_width="15dp"
                 android:layout_height="25dp"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
                 android:layout_marginLeft="100px"
                 android:layout_marginTop="70px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -143,8 +180,11 @@
                 android:layout_width="15dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="200px"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
                 android:layout_marginTop="285px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -152,8 +192,11 @@
                 android:layout_width="15dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="200px"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
                 android:layout_marginTop="425px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -163,6 +206,9 @@
                 android:layout_marginLeft="200px"
                 android:layout_marginTop="145px"
                 android:text="Button"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -170,42 +216,58 @@
                 android:layout_width="15dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="570px"
+                android:tag="@color/btnDefaultColor"
+                android:backgroundTint="@color/btnDefaultColor"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
                 android:id="@+id/btn0_6"
                 android:layout_width="15dp"
                 android:layout_height="25dp"
+                android:backgroundTint="@color/btnDefaultColor"
+                android:tag="@color/btnDefaultColor"
                 android:layout_marginLeft="940px"
+
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
                 android:id="@+id/btn6_6"
                 android:layout_width="15dp"
+                android:backgroundTint="@color/btnDefaultColor"
                 android:layout_height="25dp"
+                android:tag="@color/btnDefaultColor"
                 android:layout_marginLeft="940px"
                 android:layout_marginTop="570px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
                 android:id="@+id/btn3_6"
                 android:layout_width="15dp"
                 android:layout_height="25dp"
+                android:tag="@color/btnDefaultColor"
+                android:backgroundTint="@color/btnDefaultColor"
                 android:layout_marginLeft="940px"
                 android:layout_marginTop="285px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
                 android:id="@+id/btn3_4"
                 android:layout_width="15dp"
                 android:layout_height="25dp"
+                android:tag="@color/btnDefaultColor"
+                android:backgroundTint="@color/btnDefaultColor"
                 android:layout_marginLeft="740px"
                 android:layout_marginTop="285px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -213,26 +275,35 @@
                 android:layout_width="15dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="740px"
+                android:tag="@color/btnDefaultColor"
+                android:backgroundTint="@color/btnDefaultColor"
                 android:layout_marginTop="425px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
                 android:id="@+id/btn2_4"
                 android:layout_width="15dp"
                 android:layout_height="25dp"
+                android:tag="@color/btnDefaultColor"
+                android:backgroundTint="@color/btnDefaultColor"
                 android:layout_marginLeft="740px"
                 android:layout_marginTop="145px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
                 android:id="@+id/btn3_5"
                 android:layout_width="15dp"
                 android:layout_height="25dp"
+                android:tag="@color/btnDefaultColor"
+                android:backgroundTint="@color/btnDefaultColor"
                 android:layout_marginLeft="840px"
                 android:layout_marginTop="285px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -240,8 +311,11 @@
                 android:layout_width="15dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="840px"
+                android:tag="@color/btnDefaultColor"
+                android:backgroundTint="@color/btnDefaultColor"
                 android:layout_marginTop="495px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <Button
@@ -249,8 +323,11 @@
                 android:layout_width="15dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="840px"
+                android:tag="@color/btnDefaultColor"
+                android:backgroundTint="@color/btnDefaultColor"
                 android:layout_marginTop="70px"
                 android:text="Button"
+                android:onClick="onClick"
                 app:cornerRadius="200px" />
 
             <View

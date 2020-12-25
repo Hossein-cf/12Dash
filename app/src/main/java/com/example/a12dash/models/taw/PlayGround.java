@@ -1,6 +1,7 @@
 package com.example.a12dash.models.taw;
 
 class PlayGround {
+
     private TawPlace[][] tawPlaces = new TawPlace[7][7];
 
     // place+clm+_+row
@@ -171,25 +172,6 @@ class PlayGround {
         place6_6.setN_W(place5_5);
         tawPlaces[6][6]=place6_6;
 
-//        for (int i = 0; i < 7; i++) {
-//            for (int j = 0; j < 7; j++) {
-//                if ((i == j || i == 6 - j) && (j != 3 || i != 3))
-//                    tawPlaces[i][j] = new TawPlace();
-//                else if (i == 3 && j != 3)
-//                    tawPlaces[i][j] = new TawPlace();
-//                else if (j == 3 && i != 3)
-//                    tawPlaces[i][j] = new TawPlace();
-//            }
-//        }
-//        for (int i = 0; i < 7; i++) {
-//            for (int j = 0; j < 7; j++) {
-//                if ((i == j || i == 6 - j) && (j != 3 || i != 3))
-//                    if (i == j) {
-//
-//                    }
-//
-//            }
-//        }
     }
 
 
