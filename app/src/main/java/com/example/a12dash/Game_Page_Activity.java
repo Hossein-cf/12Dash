@@ -106,7 +106,95 @@ public class Game_Page_Activity extends AppCompatActivity {
 
 
     public boolean checkForGoal(Position position) {
-        //TODO complete this method
+
+
+        TawPlace place = places[position.getY()][position.getX()];
+
+        if (place.getTop().getPosition().getX() == 0 && place.getTop().getPosition().getY() == 0) {
+            //TODO check down right and s-e
+
+
+        } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 0) {
+            //TODO check down right and left
+
+
+        } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 4) {
+            //TODO check down right and left
+
+
+        } else if (place.getTop().getPosition().getX() == 6 && place.getTop().getPosition().getY() == 0) {
+            //TODO check down left and s-w
+
+        } else if (place.getTop().getPosition().getX() == 0 && place.getTop().getPosition().getY() == 6) {
+            //TODO check top right and n-e
+
+
+        } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 6) {
+            //TODO check top right and left
+
+
+        } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 2) {
+            //TODO check top right and left
+
+
+        } else if (place.getTop().getPosition().getX() == 6 && place.getTop().getPosition().getY() == 6) {
+            //TODO check top left and n-w
+
+        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 6) {
+            //TODO check left top down
+
+
+        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 2) {
+            //TODO check left top down
+
+
+        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 0) {
+            //TODO check right top down
+
+
+        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 4) {
+            //TODO check right top down
+
+
+        } else if (place.getTop().getPosition().getY() == 2 && place.getTop().getPosition().getX() == 2) {
+
+            //TODO check left down n-w
+
+        } else if (place.getTop().getPosition().getY() == 2 && place.getTop().getPosition().getX() == 4) {
+
+            //TODO check down Right n-e
+
+        } else if (place.getTop().getPosition().getY() == 4 && place.getTop().getPosition().getX() == 2) {
+            //TODO check top Right s-w
+
+        } else if (place.getTop().getPosition().getY() == 4 && place.getTop().getPosition().getX() == 4) {
+            //TODO check top left s-e
+
+        } else if (place.getTop().getPosition().getY() == 1 && place.getTop().getPosition().getX() == 1) {
+            //TODO check down right n-W and s-e
+
+        }else if (place.getTop().getPosition().getY() == 1 && place.getTop().getPosition().getX() == 3) {
+            //TODO check top left right down
+
+        }else if (place.getTop().getPosition().getY() == 1 && place.getTop().getPosition().getX() == 5) {
+            //TODO check down left s-w n_e
+
+        }else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 1) {
+            //TODO check top left right down
+
+        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 5) {
+            //TODO check top left right down
+
+        }else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 1) {
+            //TODO check top left  n-e s-w
+
+        }else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 3) {
+            //TODO check top left right down
+
+        }else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 5) {
+            //TODO check top  right n-w s-e
+
+        }
 
         return false;
     }
