@@ -109,17 +109,22 @@ public class Game_Page_Activity extends AppCompatActivity {
 
 
         TawPlace place = places[position.getY()][position.getX()];
-
+        //place.getCurrentTaw().getPlayer().getId();
         if (place.getTop().getPosition().getX() == 0 && place.getTop().getPosition().getY() == 0) {
             //TODO check down right and s-e
 
 
         } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 0) {
-            //TODO check down right and left
+            if(down_left_right(place,place.getCurrentTaw().getPlayer().getId())){
+
+            }
 
 
         } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 4) {
-            //TODO check down right and left
+
+            if(down_left_right(place,place.getCurrentTaw().getPlayer().getId())){
+
+            }
 
 
         } else if (place.getTop().getPosition().getX() == 6 && place.getTop().getPosition().getY() == 0) {
@@ -130,31 +135,46 @@ public class Game_Page_Activity extends AppCompatActivity {
 
 
         } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 6) {
-            //TODO check top right and left
+            //TODO check top right and left(Done)
+            if(top_left_right(place,place.getCurrentTaw().getPlayer().getId())){
 
+            }
 
         } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 2) {
-            //TODO check top right and left
+            //TODO check top right and left(Done)
+            if(top_left_right(place,place.getCurrentTaw().getPlayer().getId())){
+
+            }
 
 
         } else if (place.getTop().getPosition().getX() == 6 && place.getTop().getPosition().getY() == 6) {
             //TODO check top left and n-w
 
         } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 6) {
-            //TODO check left top down
+            //TODO check left top down(Done)
+            if(top_down_left(place,place.getCurrentTaw().getPlayer().getId())){
 
+            }
 
         } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 2) {
-            //TODO check left top down
+            //TODO check left top down(Done)
+            if(top_down_left(place,place.getCurrentTaw().getPlayer().getId())){
+
+            }
 
 
         } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 0) {
-            //TODO check right top down
+            //TODO check right top down(Done)
+            if(top_down_right(place,place.getCurrentTaw().getPlayer().getId())){
+
+            }
 
 
         } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 4) {
-            //TODO check right top down
+            //TODO check right top down(Done)
+            if(top_down_right(place,place.getCurrentTaw().getPlayer().getId())){
 
+            }
 
         } else if (place.getTop().getPosition().getY() == 2 && place.getTop().getPosition().getX() == 2) {
 
@@ -173,25 +193,41 @@ public class Game_Page_Activity extends AppCompatActivity {
         } else if (place.getTop().getPosition().getY() == 1 && place.getTop().getPosition().getX() == 1) {
             //TODO check down right n-W and s-e
 
-        }else if (place.getTop().getPosition().getY() == 1 && place.getTop().getPosition().getX() == 3) {
-            //TODO check top left right down
 
-        }else if (place.getTop().getPosition().getY() == 1 && place.getTop().getPosition().getX() == 5) {
+        } else if (place.getTop().getPosition().getY() == 1 && place.getTop().getPosition().getX() == 3) {
+            //TODO check top left right down(Done)
+            if(top_down_left_right(place,place.getCurrentTaw().getPlayer().getId())){
+
+            }
+
+
+        } else if (place.getTop().getPosition().getY() == 1 && place.getTop().getPosition().getX() == 5) {
             //TODO check down left s-w n_e
 
-        }else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 1) {
-            //TODO check top left right down
+        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 1) {
+            //TODO check top left right down(Done)
+            if(top_down_left_right(place,place.getCurrentTaw().getPlayer().getId())){
+
+            }
 
         } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 5) {
-            //TODO check top left right down
+            //TODO check top left right down(Done)
+            if(top_down_left_right(place,place.getCurrentTaw().getPlayer().getId())){
 
-        }else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 1) {
+            }
+
+
+        } else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 1) {
             //TODO check top left  n-e s-w
 
-        }else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 3) {
-            //TODO check top left right down
+        } else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 3) {
+            //TODO check top left right down(Done)
+            if(top_down_left_right(place,place.getCurrentTaw().getPlayer().getId())){
 
-        }else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 5) {
+            }
+
+
+        } else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 5) {
             //TODO check top  right n-w s-e
 
         }
@@ -199,6 +235,72 @@ public class Game_Page_Activity extends AppCompatActivity {
         return false;
     }
 
+    public boolean down_left_right(TawPlace place , int playerId) {
+            if(place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId){
+                //check down
+                    return (place.getDown()).getDown().getCurrentTaw() !=null && (place.getDown()).getDown().getCurrentTaw().getPlayer().getId() == playerId ;
+            }
+            if(place.getLeft().getCurrentTaw() != null && place.getLeft().getCurrentTaw().getPlayer().getId() == playerId){
+                // check right
+                    return place.getRight().getCurrentTaw() != null && place.getRight().getCurrentTaw().getPlayer().getId() == playerId;
+            }
+        return false;
+    }
+
+    public boolean top_down_left_right(TawPlace place , int playerId) {
+            if(place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId){
+                // check top
+                return place.getTop().getCurrentTaw() !=null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId;
+            }
+            if(place.getLeft().getCurrentTaw() !=null && place.getLeft().getCurrentTaw().getPlayer().getId() == playerId){
+                // check right
+                return place.getRight().getCurrentTaw() !=null && place.getRight().getCurrentTaw().getPlayer().getId() == playerId;
+            }
+
+        return false;
+    }
+
+
+
+    public boolean top_left_right(TawPlace place , int playerId) {
+        if(place.getTop().getCurrentTaw() !=null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId){
+            //check down
+            return place.getDown().getCurrentTaw() !=null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId;
+        }
+        if(place.getLeft().getCurrentTaw() !=null && place.getLeft().getCurrentTaw().getPlayer().getId() == playerId){
+            //check right
+            return place.getRight().getCurrentTaw() !=null && place.getRight().getCurrentTaw().getPlayer().getId() == playerId;
+        }
+
+
+        return false;
+    }
+
+    public boolean top_down_right(TawPlace place , int playerId) {
+        if(place.getRight().getCurrentTaw() !=null && place.getRight().getCurrentTaw().getPlayer().getId() == playerId){
+            //check right
+            return (place.getRight()).getRight().getCurrentTaw() !=null && (place.getRight()).getRight().getCurrentTaw().getPlayer().getId() == playerId;
+        }
+        if(place.getTop().getCurrentTaw() !=null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId){
+            //check down
+            return place.getDown().getCurrentTaw() !=null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId;
+        }
+
+        return false;
+    }
+
+    public boolean top_down_left(TawPlace place , int playerId) {
+        if(place.getLeft().getCurrentTaw() !=null && place.getLeft().getCurrentTaw().getPlayer().getId() == playerId){
+            //check right
+            return (place.getLeft()).getLeft().getCurrentTaw() !=null && (place.getLeft()).getLeft().getCurrentTaw().getPlayer().getId() == playerId;
+        }
+        if(place.getTop().getCurrentTaw() !=null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId){
+            //check down
+            return place.getDown().getCurrentTaw() !=null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId;
+        }
+
+        return false;
+    }
 
     public void autoPlay() {
         //TODO
