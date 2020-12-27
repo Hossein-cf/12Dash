@@ -1,15 +1,18 @@
 
 package com.example.a12dash;
 
+import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a12dash.models.player.Player;
+import com.example.a12dash.models.player.PlayerState;
 import com.example.a12dash.models.taw.PlayGround;
 import com.example.a12dash.models.taw.Position;
 import com.example.a12dash.models.taw.Taw;
@@ -33,6 +36,7 @@ public class Game_Page_Activity extends AppCompatActivity {
     private List<Integer> ids;
     private int convertedColor;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +45,9 @@ public class Game_Page_Activity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         playerFirst = new Player(1);
-        
+
         playerSecond = new Player(2);
-        
+
         ground = new PlayGround();
         places = ground.getTawPlaces();
         gameState = GameState.ENTER_TAW.value;
@@ -54,13 +58,40 @@ public class Game_Page_Activity extends AppCompatActivity {
         assert b != null;
         firstPlayerColor = b.getInt("firstPlayerColor");
         secondPlayerColor = b.getInt("secondPlayerColor");
-        firstPlayerName = b.getString("firstPlayerName");
-        secondPlayerName = b.getString("secondPlayerName");
-        gameStarter = b.getString("gameStarter");
-        assert gameStarter != null;
-        if (gameStarter.equals("First one"))
-            flag = true;
 
+        TextView txtfirstPlayerName= findViewById(R.id.txtfirstPlayerName);
+        txtfirstPlayerName.setText(b.getString("firstPlayerName"));
+
+        TextView txtfirstPlayerInHandTawsNumber = findViewById(R.id.txtfirstPlayerInHandTawsNumber);
+        txtfirstPlayerInHandTawsNumber.setText("taws in hand :"+"\n"+playerFirst.getTawList().size());
+
+        TextView txtfirstPlayerOutTawsNumber =  findViewById(R.id.txtfirstPlayerOutTawsNumber);
+        txtfirstPlayerOutTawsNumber.setText("out taws :"+"\n"+0);
+
+       TextView txtSecondPlayerName=findViewById(R.id.txtsecondPlayerName);
+       txtSecondPlayerName.setText(b.getString("secondPlayerName"));
+
+       TextView txtsecondPlayerInHandTawsNumber = findViewById(R.id.txtsecondPlayerInHandTawsNumber);
+       txtsecondPlayerInHandTawsNumber.setText("taws in hand "+"\n"+playerSecond.getTawList().size());
+
+        TextView txtsecondPlayerOutTawsNumber= findViewById(R.id.txtsecondPlayerOutTawsNumber);
+        txtsecondPlayerOutTawsNumber.setText("out taws :"+"\n"+0);
+
+        gameStarter = b.getString("gameStarter");
+
+        assert gameStarter != null;
+        if (gameStarter.equals("First one")) {
+            flag = true;
+           TextView txtfirstPlayerCondition=findViewById(R.id.txtfirstPalyerCondition);
+           txtfirstPlayerCondition.setText(PlayerState.MY_TURN.name());
+           TextView txtsecondPalyerCondition= findViewById(R.id.txtsecondPalyerCondition);
+           txtsecondPalyerCondition.setText(PlayerState.WAITING.name());
+        }else {
+            TextView txtfirstPlayerCondition=findViewById(R.id.txtfirstPalyerCondition);
+            txtfirstPlayerCondition.setText(PlayerState.WAITING.name());
+            TextView txtsecondPalyerCondition= findViewById(R.id.txtsecondPalyerCondition);
+            txtsecondPalyerCondition.setText(PlayerState.MY_TURN.name());
+        }
         System.out.println(firstPlayerColor);
         System.out.println(secondPlayerColor);
         System.out.println(Color.parseColor("#adad85"));
@@ -71,7 +102,7 @@ public class Game_Page_Activity extends AppCompatActivity {
 
         String id = view.getResources().getResourceEntryName(view.getId());
         Position position = getTowSelectedPosition(id);
-        if (flag && view.getTag().toString().contains("#ffadad85") && gameState == GameState.ENTER_TAW.value &&playerFirst.getNumberOfTawInHand()>0) {
+        if (flag && view.getTag().toString().contains("#ffadad85") && gameState == GameState.ENTER_TAW.value && playerFirst.getNumberOfTawInHand() > 0) {
 
 
             findViewById(view.getId()).setBackgroundColor(firstPlayerColor);
@@ -89,7 +120,7 @@ public class Game_Page_Activity extends AppCompatActivity {
             if (goal) {
                 if (playerSecond.getNumberOfTawInHand() > 0) {
                     playerSecond.getTawList().remove(playerSecond.getTawList().size() - 1);
-                    playerSecond.setNumberOfTawInHand(playerSecond.getNumberOfTawInHand()-1);
+                    playerSecond.setNumberOfTawInHand(playerSecond.getNumberOfTawInHand() - 1);
 
                 } else {
                     gameState = GameState.DELETE_TAW.value;
@@ -101,10 +132,10 @@ public class Game_Page_Activity extends AppCompatActivity {
             flag = false;
             // change game state
 
-            if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand()==0){
+            if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand() == 0) {
                 changeGameStateToMoveTow();
             }
-        } else if (view.getTag().toString().contains("#ffadad85") && gameState == GameState.ENTER_TAW.value&&playerSecond.getNumberOfTawInHand()>0) {
+        } else if (view.getTag().toString().contains("#ffadad85") && gameState == GameState.ENTER_TAW.value && playerSecond.getNumberOfTawInHand() > 0) {
             findViewById(view.getId()).setBackgroundColor(secondPlayerColor);
             findViewById(view.getId()).setTag(secondPlayerColor);
 
@@ -123,7 +154,7 @@ public class Game_Page_Activity extends AppCompatActivity {
             if (goal) {
                 if (playerFirst.getNumberOfTawInHand() > 0) {
                     playerFirst.getTawList().remove(playerFirst.getTawList().size() - 1);
-                    playerFirst.setNumberOfTawInHand(playerFirst.getNumberOfTawInHand()-1);
+                    playerFirst.setNumberOfTawInHand(playerFirst.getNumberOfTawInHand() - 1);
                 } else {
                     gameState = GameState.DELETE_TAW.value;
                     enableTheRivalTaw(flag);
@@ -134,26 +165,29 @@ public class Game_Page_Activity extends AppCompatActivity {
             }
             flag = true;
             //change game state
-            if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand()==0){
+            if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand() == 0) {
                 changeGameStateToMoveTow();
             }
-        } else if (gameState == GameState.DELETE_TAW.value){
+        } else if (gameState == GameState.DELETE_TAW.value) {
             Toast.makeText(getApplicationContext(), "choose another taw", Toast.LENGTH_SHORT).show();
             //change game state
-            if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand()==0){
+            if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand() == 0) {
                 changeGameStateToMoveTow();
-            }else {
+            } else {
                 changeGameStateToEnterTow();
             }
         }
     }
 
-    public void changeGameStateToMoveTow(){
+    public void changeGameStateToMoveTow() {
         gameState = GameState.MOVE_TAW.value;
     }
-    public void changeGameStateToDeleteTow(){
+
+    public void changeGameStateToDeleteTow() {
         gameState = GameState.DELETE_TAW.value;
-    } public void changeGameStateToEnterTow(){
+    }
+
+    public void changeGameStateToEnterTow() {
         gameState = GameState.ENTER_TAW.value;
     }
 
@@ -601,12 +635,10 @@ public class Game_Page_Activity extends AppCompatActivity {
         });
     }
 
-    public TawPlace getTawByPosition(Position position){
+    public TawPlace getTawByPosition(Position position) {
 
         return places[position.getY()][position.getX()];
     }
-
-
 
 
 }

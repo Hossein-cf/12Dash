@@ -25,28 +25,28 @@
             android:layout_marginBottom="100px">
 
             <TextView
-                android:id="@+id/firstPlayerName"
+                android:id="@+id/txtfirstPlayerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100px"
                 android:text="player name" />
 
             <TextView
-                android:id="@+id/firstPlayerInHandTawsNumber"
+                android:id="@+id/txtfirstPlayerInHandTawsNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="250px"
                 android:text="in hand taws" />
 
             <TextView
-                android:id="@+id/firstPalyerCondition"
+                android:id="@+id/txtfirstPalyerCondition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="420px"
                 android:text="current condition" />
 
             <TextView
-                android:id="@+id/firstPlayerOutTawsNumber"
+                android:id="@+id/txtfirstPlayerOutTawsNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="600px"
@@ -741,28 +741,28 @@
             android:layout_marginBottom="100px">
 
             <TextView
-                android:id="@+id/secondPlayerName"
+                android:id="@+id/txtsecondPlayerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100px"
                 android:text="player name" />
 
             <TextView
-                android:id="@+id/secondPlayerInHandTawsNumber"
+                android:id="@+id/txtsecondPlayerInHandTawsNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="250px"
                 android:text="in hand taws" />
 
             <TextView
-                android:id="@+id/secondPalyerCondition"
+                android:id="@+id/txtsecondPalyerCondition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="420px"
                 android:text="current condition" />
 
             <TextView
-                android:id="@+id/secondPlayerOutTawsNumber"
+                android:id="@+id/txtsecondPlayerOutTawsNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="600px"
