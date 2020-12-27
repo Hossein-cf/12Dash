@@ -103,12 +103,13 @@ public class activity_fill_information extends AppCompatActivity {
 
 
     public int getColor(String colorName){
+
         if (colorName.equals("Green"))
-            return Color.parseColor("#48F40B");
+            return Color.parseColor("#65FA32");
         if (colorName.equals("Red"))
-            return Color.parseColor("#DD130C");
+            return Color.parseColor("#FF0026");
         if (colorName.equals("Blue"))
-            return Color.parseColor("#0885DA");
+            return Color.parseColor("#4DB2F6");
         return 0;
     }
 }

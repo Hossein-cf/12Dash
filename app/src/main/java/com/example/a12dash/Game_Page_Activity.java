@@ -1,3 +1,4 @@
+
 package com.example.a12dash;
 
 import android.content.pm.ActivityInfo;
@@ -11,9 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.a12dash.models.player.Player;
 import com.example.a12dash.models.taw.PlayGround;
 import com.example.a12dash.models.taw.Position;
+import com.example.a12dash.models.taw.Taw;
 import com.example.a12dash.models.taw.TawCondition;
 import com.example.a12dash.models.taw.TawPlace;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Game_Page_Activity extends AppCompatActivity {
@@ -26,6 +30,8 @@ public class Game_Page_Activity extends AppCompatActivity {
     private PlayGround ground;
     private TawPlace[][] places;
     private int gameState;
+    private List<Integer> ids;
+    private int convertedColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +40,15 @@ public class Game_Page_Activity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        playerFirst = new Player();
-        playerSecond = new Player();
+        playerFirst = new Player(1);
+        
+        playerSecond = new Player(2);
+        
         ground = new PlayGround();
         places = ground.getTawPlaces();
         gameState = GameState.ENTER_TAW.value;
+        ids = new ArrayList<>();
+        addIdOfButtonsToList();
 
         Bundle b = getIntent().getExtras();
         assert b != null;
@@ -47,7 +57,6 @@ public class Game_Page_Activity extends AppCompatActivity {
         firstPlayerName = b.getString("firstPlayerName");
         secondPlayerName = b.getString("secondPlayerName");
         gameStarter = b.getString("gameStarter");
-
         assert gameStarter != null;
         if (gameStarter.equals("First one"))
             flag = true;
@@ -62,38 +71,90 @@ public class Game_Page_Activity extends AppCompatActivity {
 
         String id = view.getResources().getResourceEntryName(view.getId());
         Position position = getTowSelectedPosition(id);
-        if (flag && view.getTag().toString().contains("#ffadad85")) {
+        if (flag && view.getTag().toString().contains("#ffadad85") && gameState == GameState.ENTER_TAW.value &&playerFirst.getNumberOfTawInHand()>0) {
 
 
             findViewById(view.getId()).setBackgroundColor(firstPlayerColor);
             findViewById(view.getId()).setTag(firstPlayerColor);
-            flag = false;
 
             // set condition to taw
             playerFirst.getTawList().get(firstPlayerTawIndex).setCondition(TawCondition.IN_GAME);
             // set place to taw
-            playerFirst.getTawList().get(firstPlayerTawIndex).setPlace(places[position.getY()][position.getX()]);
+            playerFirst.getTawList().get(firstPlayerTawIndex).setPlace(places[position.getY()][position.getX()].getPosition());
             // set taw to play ground
             places[position.getY()][position.getX()].setCurrentTaw(playerFirst.getTawList().get(firstPlayerTawIndex++));
+            playerFirst.setNumberOfTawInGame(playerFirst.getNumberOfTawInGame() + 1);
+            playerFirst.setNumberOfTawInHand(playerFirst.getNumberOfTawInHand() - 1);
+            boolean goal = checkForGoal(position);
+            if (goal) {
+                if (playerSecond.getNumberOfTawInHand() > 0) {
+                    playerSecond.getTawList().remove(playerSecond.getTawList().size() - 1);
+                    playerSecond.setNumberOfTawInHand(playerSecond.getNumberOfTawInHand()-1);
 
+                } else {
+                    gameState = GameState.DELETE_TAW.value;
+                    enableTheRivalTaw(flag);
+                }
+                Toast.makeText(getApplicationContext(), "Goooaaaallllllllll", Toast.LENGTH_SHORT).show();
 
-        } else if (view.getTag().toString().contains("#ffadad85")) {
+            }
+            flag = false;
+            // change game state
+
+            if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand()==0){
+                changeGameStateToMoveTow();
+            }
+        } else if (view.getTag().toString().contains("#ffadad85") && gameState == GameState.ENTER_TAW.value&&playerSecond.getNumberOfTawInHand()>0) {
             findViewById(view.getId()).setBackgroundColor(secondPlayerColor);
             findViewById(view.getId()).setTag(secondPlayerColor);
 
-            flag = true;
 
             // set condition to taw
             playerSecond.getTawList().get(secondPlayerTawIndex).setCondition(TawCondition.IN_GAME);
             // set place to taw
-            playerSecond.getTawList().get(secondPlayerTawIndex).setPlace(places[position.getY()][position.getX()]);
+            playerSecond.getTawList().get(secondPlayerTawIndex).setPlace(places[position.getY()][position.getX()].getPosition());
             // set taw to play ground
             places[position.getY()][position.getX()].setCurrentTaw(playerSecond.getTawList().get(secondPlayerTawIndex++));
+            // update number of taw in or out of game
+            playerSecond.setNumberOfTawInGame(playerSecond.getNumberOfTawInGame() + 1);
+            playerSecond.setNumberOfTawInHand(playerSecond.getNumberOfTawInHand() - 1);
 
+            boolean goal = checkForGoal(position);
+            if (goal) {
+                if (playerFirst.getNumberOfTawInHand() > 0) {
+                    playerFirst.getTawList().remove(playerFirst.getTawList().size() - 1);
+                    playerFirst.setNumberOfTawInHand(playerFirst.getNumberOfTawInHand()-1);
+                } else {
+                    gameState = GameState.DELETE_TAW.value;
+                    enableTheRivalTaw(flag);
+                    //TODO enable the button for delete
+                }
+                Toast.makeText(getApplicationContext(), "Goooaaaallllllllll", Toast.LENGTH_SHORT).show();
 
-        } else {
+            }
+            flag = true;
+            //change game state
+            if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand()==0){
+                changeGameStateToMoveTow();
+            }
+        } else if (gameState == GameState.DELETE_TAW.value){
             Toast.makeText(getApplicationContext(), "choose another taw", Toast.LENGTH_SHORT).show();
+            //change game state
+            if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand()==0){
+                changeGameStateToMoveTow();
+            }else {
+                changeGameStateToEnterTow();
+            }
         }
+    }
+
+    public void changeGameStateToMoveTow(){
+        gameState = GameState.MOVE_TAW.value;
+    }
+    public void changeGameStateToDeleteTow(){
+        gameState = GameState.DELETE_TAW.value;
+    } public void changeGameStateToEnterTow(){
+        gameState = GameState.ENTER_TAW.value;
     }
 
 
@@ -101,262 +162,262 @@ public class Game_Page_Activity extends AppCompatActivity {
 
 
         TawPlace place = places[position.getY()][position.getX()];
-        int playerId = place.getCurrentTaw().getPlayer().getId();
-        //place.getCurrentTaw().getPlayer().getId();
-        if (place.getTop().getPosition().getX() == 0 && place.getTop().getPosition().getY() == 0) {
+        int playerId = place.getCurrentTaw().getPlayerId();
+        //place.getCurrentTaw().getPlayer();
+        if (place.getPosition().getX() == 0 && place.getPosition().getY() == 0) {
             // check down right and s-e
-            if (place.getRight().getCurrentTaw() != null && place.getRight().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getRight().getRight().getCurrentTaw() != null && place.getRight().getRight().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getRight()).getCurrentTaw() != null && getTawByPosition(place.getRight()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
 
-            } else if (place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getDown().getDown().getCurrentTaw() != null && place.getDown().getDown().getCurrentTaw().getPlayer().getId() == playerId)
+            } else if (getTawByPosition(place.getDown()).getCurrentTaw() != null && getTawByPosition(place.getDown()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
 
-            } else if (place.getS_E().getCurrentTaw() != null && place.getS_E().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getS_E().getS_E().getCurrentTaw() != null && place.getS_E().getS_E().getCurrentTaw().getPlayer().getId() == playerId)
+            } else if (getTawByPosition(place.getS_E()).getCurrentTaw() != null && getTawByPosition(place.getS_E()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getS_E()).getS_E()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getS_E()).getS_E()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
             // done
-        } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 0) {
+        } else if (place.getPosition().getX() == 3 && place.getPosition().getY() == 0) {
             //check down_left_right
-            return down_left_right(place, place.getCurrentTaw().getPlayer().getId());
+            return down_left_right(place, place.getCurrentTaw().getPlayerId());
             //done
 
-        } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 4) {
+        } else if (place.getPosition().getX() == 3 && place.getPosition().getY() == 4) {
             //check down_left_right
 
-            return down_left_right(place, place.getCurrentTaw().getPlayer().getId());
+            return down_left_right(place, place.getCurrentTaw().getPlayerId());
             //done
 
-        } else if (place.getTop().getPosition().getX() == 6 && place.getTop().getPosition().getY() == 0) {
+        } else if (place.getPosition().getX() == 6 && place.getPosition().getY() == 0) {
             // check down left and s-w
-            if (place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getDown().getDown().getCurrentTaw() != null && place.getDown().getDown().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getDown()).getCurrentTaw() != null && getTawByPosition(place.getDown()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
-            if (place.getLeft().getCurrentTaw() != null && place.getLeft().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getLeft().getLeft().getCurrentTaw() != null && place.getLeft().getLeft().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getLeft()).getCurrentTaw() != null && getTawByPosition(place.getLeft()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
-            if (place.getS_W().getCurrentTaw() != null && place.getS_W().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getS_W().getS_W().getCurrentTaw() != null && place.getS_W().getS_W().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getS_W()).getCurrentTaw() != null && getTawByPosition(place.getS_W()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getS_W()).getS_W()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getS_W()).getS_W()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
             // done
-        } else if (place.getTop().getPosition().getX() == 0 && place.getTop().getPosition().getY() == 6) {
+        } else if (place.getPosition().getX() == 0 && place.getPosition().getY() == 6) {
             //check top right and n-e
-            if (place.getTop().getCurrentTaw() != null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getTop().getTop().getCurrentTaw() != null && place.getTop().getTop().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getTop()).getCurrentTaw() != null && getTawByPosition(place.getTop()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
-            if (place.getRight().getCurrentTaw() != null && place.getRight().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getRight().getRight().getCurrentTaw() != null && place.getRight().getRight().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getRight()).getCurrentTaw() != null && getTawByPosition(place.getRight()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
-            if (place.getN_E().getCurrentTaw() != null && place.getN_E().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getN_E().getN_E().getCurrentTaw() != null && place.getN_E().getN_E().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getN_E()).getCurrentTaw() != null && getTawByPosition(place.getN_E()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getN_E()).getN_E()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getN_E()).getN_E()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
             //done
 
-        } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 6) {
+        } else if (place.getPosition().getX() == 3 && place.getPosition().getY() == 6) {
             // check top right and left
-            return top_left_right(place, place.getCurrentTaw().getPlayer().getId());
+            return top_left_right(place, place.getCurrentTaw().getPlayerId());
             //done
 
-        } else if (place.getTop().getPosition().getX() == 3 && place.getTop().getPosition().getY() == 2) {
+        } else if (place.getPosition().getX() == 3 && place.getPosition().getY() == 2) {
             // check top right and left
-            return top_left_right(place, place.getCurrentTaw().getPlayer().getId());
+            return top_left_right(place, place.getCurrentTaw().getPlayerId());
             //done
 
-        } else if (place.getTop().getPosition().getX() == 6 && place.getTop().getPosition().getY() == 6) {
+        } else if (place.getPosition().getX() == 6 && place.getPosition().getY() == 6) {
             // check top left and n-w
-            if (place.getTop().getCurrentTaw() != null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getTop().getTop().getCurrentTaw() != null && place.getTop().getTop().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getTop()).getCurrentTaw() != null && getTawByPosition(place.getTop()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
-            if (place.getLeft().getCurrentTaw() != null && place.getLeft().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getLeft().getLeft().getCurrentTaw() != null && place.getLeft().getLeft().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getLeft()).getCurrentTaw() != null && getTawByPosition(place.getLeft()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
-            if (place.getN_W().getCurrentTaw() != null && place.getN_W().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getN_W().getN_W().getCurrentTaw() != null && place.getN_W().getN_W().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getN_W()).getCurrentTaw() != null && getTawByPosition(place.getN_W()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getN_W()).getN_W()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getN_W()).getN_W()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
             //done
-        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 6) {
+        } else if (place.getPosition().getY() == 3 && place.getPosition().getX() == 6) {
             // check left top down
-            return top_down_left(place, place.getCurrentTaw().getPlayer().getId());
+            return top_down_left(place, place.getCurrentTaw().getPlayerId());
             // done
 
-        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 2) {
+        } else if (place.getPosition().getY() == 3 && place.getPosition().getX() == 2) {
             // check left top down(Done)
-           return top_down_left(place, place.getCurrentTaw().getPlayer().getId());
+            return top_down_left(place, place.getCurrentTaw().getPlayerId());
 
             //done
-        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 0) {
+        } else if (place.getPosition().getY() == 3 && place.getPosition().getX() == 0) {
             // check right top down(Done)
-            return top_down_right(place, place.getCurrentTaw().getPlayer().getId());
+            return top_down_right(place, place.getCurrentTaw().getPlayerId());
 
             //done
-        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 4) {
+        } else if (place.getPosition().getY() == 3 && place.getPosition().getX() == 4) {
             // check right top down(Done)
-            return top_down_right(place, place.getCurrentTaw().getPlayer().getId());
+            return top_down_right(place, place.getCurrentTaw().getPlayerId());
 
             //done
 
-        } else if (place.getTop().getPosition().getY() == 2 && place.getTop().getPosition().getX() == 2) {
+        } else if (place.getPosition().getY() == 2 && place.getPosition().getX() == 2) {
 
             // check left down n-w
-            if (place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getDown().getDown().getCurrentTaw() != null && place.getDown().getDown().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getDown()).getCurrentTaw() != null && getTawByPosition(place.getDown()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
-            if (place.getRight().getCurrentTaw() != null &&place.getRight().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getRight().getRight().getCurrentTaw() != null && place.getRight().getRight().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getRight()).getCurrentTaw() != null && getTawByPosition(place.getRight()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
-            if (place.getN_W().getCurrentTaw() != null &&place.getN_W().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getN_W().getN_W().getCurrentTaw() != null && place.getN_W().getN_W().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getN_W()).getCurrentTaw() != null && getTawByPosition(place.getN_W()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getN_W()).getN_W()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getN_W()).getN_W()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
             // done
-        } else if (place.getTop().getPosition().getY() == 2 && place.getTop().getPosition().getX() == 4) {
+        } else if (place.getPosition().getY() == 2 && place.getPosition().getX() == 4) {
 
             // check down left n-e
-            if (place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getDown().getDown().getCurrentTaw() != null && place.getDown().getDown().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getDown()).getCurrentTaw() != null && getTawByPosition(place.getDown()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
-            if (place.getLeft().getCurrentTaw() != null &&place.getLeft().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getLeft().getLeft().getCurrentTaw() != null && place.getLeft().getLeft().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getLeft()).getCurrentTaw() != null && getTawByPosition(place.getLeft()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
-            if (place.getN_E().getCurrentTaw() != null &&place.getN_E().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getN_E().getN_E().getCurrentTaw() != null && place.getN_E().getN_E().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getN_E()).getCurrentTaw() != null && getTawByPosition(place.getN_E()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getN_E()).getN_E()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getN_E()).getN_E()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
             //done
-        } else if (place.getTop().getPosition().getY() == 4 && place.getTop().getPosition().getX() == 2) {
+        } else if (place.getPosition().getY() == 4 && place.getPosition().getX() == 2) {
             // check top Right s-w
-            if (place.getTop().getCurrentTaw() != null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getTop().getTop().getCurrentTaw() != null && place.getTop().getTop().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getTop()).getCurrentTaw() != null && getTawByPosition(place.getTop()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
-            if (place.getRight().getCurrentTaw() != null &&place.getRight().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getRight().getRight().getCurrentTaw() != null && place.getRight().getRight().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getRight()).getCurrentTaw() != null && getTawByPosition(place.getRight()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
-            if (place.getS_W().getCurrentTaw() != null &&place.getS_W().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getS_W().getS_W().getCurrentTaw() != null && place.getS_W().getS_W().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getS_W()).getCurrentTaw() != null && getTawByPosition(place.getS_W()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getS_W()).getS_W()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getS_W()).getS_W()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
             //ended
-        } else if (place.getTop().getPosition().getY() == 4 && place.getTop().getPosition().getX() == 4) {
+        } else if (place.getPosition().getY() == 4 && place.getPosition().getX() == 4) {
             // check top left s-e
-            if (place.getTop().getCurrentTaw() != null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getTop().getTop().getCurrentTaw() != null && place.getTop().getTop().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getTop()).getCurrentTaw() != null && getTawByPosition(place.getTop()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
-            if (place.getLeft().getCurrentTaw() != null &&place.getLeft().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getLeft().getLeft().getCurrentTaw() != null && place.getLeft().getLeft().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getLeft()).getCurrentTaw() != null && getTawByPosition(place.getLeft()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
-            if (place.getS_E().getCurrentTaw() != null &&place.getS_E().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getS_E().getS_E().getCurrentTaw() != null && place.getS_E().getS_E().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getS_E()).getCurrentTaw() != null && getTawByPosition(place.getS_E()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getS_E()).getS_E()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getS_E()).getS_E()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
             //ended
-        } else if (place.getTop().getPosition().getY() == 1 && place.getTop().getPosition().getX() == 1) {
+        } else if (place.getPosition().getY() == 1 && place.getPosition().getX() == 1) {
             // check down right n-W and s-e
-            if (place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getDown().getDown().getCurrentTaw() != null && place.getDown().getDown().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getDown()).getCurrentTaw() != null && getTawByPosition(place.getDown()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
-            if (place.getRight().getCurrentTaw() != null &&place.getRight().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getRight().getRight().getCurrentTaw() != null && place.getRight().getRight().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getRight()).getCurrentTaw() != null && getTawByPosition(place.getRight()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
-            if (place.getS_E().getCurrentTaw() != null &&place.getS_E().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getN_W().getCurrentTaw() != null && place.getN_W().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getS_E()).getCurrentTaw() != null && getTawByPosition(place.getS_E()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(place.getN_W()).getCurrentTaw() != null && getTawByPosition(place.getN_W()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
             // done
-        } else if (place.getTop().getPosition().getY() == 1 && place.getTop().getPosition().getX() == 3) {
+        } else if (place.getPosition().getY() == 1 && place.getPosition().getX() == 3) {
             // check top left right down
-            return top_down_left_right(place, place.getCurrentTaw().getPlayer().getId());
+            return top_down_left_right(place, place.getCurrentTaw().getPlayerId());
 
             //done
-        } else if (place.getTop().getPosition().getY() == 1 && place.getTop().getPosition().getX() == 5) {
+        } else if (place.getPosition().getY() == 1 && place.getPosition().getX() == 5) {
             // check down left s-w n_e
-            if (place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getDown().getDown().getCurrentTaw() != null && place.getDown().getDown().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getDown()).getCurrentTaw() != null && getTawByPosition(place.getDown()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
-            if (place.getLeft().getCurrentTaw() != null &&place.getLeft().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getLeft().getLeft().getCurrentTaw() != null && place.getLeft().getLeft().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getLeft()).getCurrentTaw() != null && getTawByPosition(place.getLeft()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
-            if (place.getN_E().getCurrentTaw() != null &&place.getN_E().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getS_W().getCurrentTaw() != null && place.getS_W().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getN_E()).getCurrentTaw() != null && getTawByPosition(place.getN_E()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(place.getS_W()).getCurrentTaw() != null && getTawByPosition(place.getS_W()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
             // done
-        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 1) {
+        } else if (place.getPosition().getY() == 3 && place.getPosition().getX() == 1) {
             // check top left right dow
-            return top_down_left_right(place, place.getCurrentTaw().getPlayer().getId());
+            return top_down_left_right(place, place.getCurrentTaw().getPlayerId());
 
             //done
-        } else if (place.getTop().getPosition().getY() == 3 && place.getTop().getPosition().getX() == 5) {
+        } else if (place.getPosition().getY() == 3 && place.getPosition().getX() == 5) {
             // check top left right down
-            return top_down_left_right(place, place.getCurrentTaw().getPlayer().getId());
+            return top_down_left_right(place, place.getCurrentTaw().getPlayerId());
             //done
 
-        } else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 1) {
+        } else if (place.getPosition().getY() == 5 && place.getPosition().getX() == 1) {
             // check top left  n-e s-w
-            if (place.getTop().getCurrentTaw() != null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getTop().getTop().getCurrentTaw() != null && place.getTop().getTop().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getTop()).getCurrentTaw() != null && getTawByPosition(place.getTop()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
-            if (place.getLeft().getCurrentTaw() != null &&place.getLeft().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getLeft().getLeft().getCurrentTaw() != null && place.getLeft().getLeft().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getRight()).getCurrentTaw() != null && getTawByPosition(place.getRight()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
-            if (place.getN_E().getCurrentTaw() != null &&place.getN_E().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getS_W().getCurrentTaw() != null && place.getS_W().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getN_E()).getCurrentTaw() != null && getTawByPosition(place.getN_E()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(place.getS_W()).getCurrentTaw() != null && getTawByPosition(place.getS_W()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
             //done
-        } else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 3) {
+        } else if (place.getPosition().getY() == 5 && place.getPosition().getX() == 3) {
             // check top left right down
-           return top_down_left_right(place, place.getCurrentTaw().getPlayer().getId());
-           //done
+            return top_down_left_right(place, place.getCurrentTaw().getPlayerId());
+            //done
 
-        } else if (place.getTop().getPosition().getY() == 5 && place.getTop().getPosition().getX() == 5) {
+        } else if (place.getPosition().getY() == 5 && place.getPosition().getX() == 5) {
             // check top  right n-w s-e
-            if (place.getTop().getCurrentTaw() != null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId) {
-                if (place.getTop().getTop().getCurrentTaw() != null && place.getTop().getTop().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getTop()).getCurrentTaw() != null && getTawByPosition(place.getTop()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
 
-            if (place.getRight().getCurrentTaw() != null &&place.getRight().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getRight().getRight().getCurrentTaw() != null && place.getRight().getRight().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getLeft()).getCurrentTaw() != null && getTawByPosition(place.getLeft()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
-            if (place.getN_W().getCurrentTaw() != null &&place.getN_W().getCurrentTaw().getPlayer().getId() ==playerId ) {
-                if (place.getS_E().getCurrentTaw() != null && place.getS_E().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getN_W()).getCurrentTaw() != null && getTawByPosition(place.getN_W()).getCurrentTaw().getPlayerId() == playerId) {
+                if (getTawByPosition(place.getS_E()).getCurrentTaw() != null && getTawByPosition(place.getS_E()).getCurrentTaw().getPlayerId() == playerId)
                     return true;
             }
             //done
@@ -366,28 +427,28 @@ public class Game_Page_Activity extends AppCompatActivity {
     }
 
     public boolean down_left_right(TawPlace place, int playerId) {
-        if (place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId) {
+        if (getTawByPosition(place.getDown()).getCurrentTaw() != null && getTawByPosition(place.getDown()).getCurrentTaw().getPlayerId() == playerId) {
             //check down
-            if (place.getDown().getDown().getCurrentTaw() != null && place.getDown().getDown().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getDown()).getDown()).getCurrentTaw().getPlayerId() == playerId)
                 return true;
         }
-        if (place.getLeft().getCurrentTaw() != null && place.getLeft().getCurrentTaw().getPlayer().getId() == playerId) {
+        if (getTawByPosition(place.getLeft()).getCurrentTaw() != null && getTawByPosition(place.getLeft()).getCurrentTaw().getPlayerId() == playerId) {
             // check right
-            if (place.getRight().getCurrentTaw() != null && place.getRight().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getRight()).getCurrentTaw() != null && getTawByPosition(place.getRight()).getCurrentTaw().getPlayerId() == playerId)
                 return true;
         }
         return false;
     }
 
     public boolean top_down_left_right(TawPlace place, int playerId) {
-        if (place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId) {
+        if (getTawByPosition(place.getDown()).getCurrentTaw() != null && getTawByPosition(place.getDown()).getCurrentTaw().getPlayerId() == playerId) {
             // check top
-            if (place.getTop().getCurrentTaw() != null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getTop()).getCurrentTaw() != null && getTawByPosition(place.getTop()).getCurrentTaw().getPlayerId() == playerId)
                 return true;
         }
-        if (place.getLeft().getCurrentTaw() != null && place.getLeft().getCurrentTaw().getPlayer().getId() == playerId) {
+        if (getTawByPosition(place.getLeft()).getCurrentTaw() != null && getTawByPosition(place.getLeft()).getCurrentTaw().getPlayerId() == playerId) {
             // check right
-            if (place.getRight().getCurrentTaw() != null && place.getRight().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getRight()).getCurrentTaw() != null && getTawByPosition(place.getRight()).getCurrentTaw().getPlayerId() == playerId)
                 return true;
         }
 
@@ -396,14 +457,14 @@ public class Game_Page_Activity extends AppCompatActivity {
 
 
     public boolean top_left_right(TawPlace place, int playerId) {
-        if (place.getTop().getCurrentTaw() != null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId) {
+        if (getTawByPosition(place.getTop()).getCurrentTaw() != null && getTawByPosition(place.getTop()).getCurrentTaw().getPlayerId() == playerId) {
             //check down
-            if (place.getTop().getTop().getCurrentTaw() != null && place.getTop().getTop().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getTop()).getTop()).getCurrentTaw().getPlayerId() == playerId)
                 return true;
         }
-        if (place.getLeft().getCurrentTaw() != null && place.getLeft().getCurrentTaw().getPlayer().getId() == playerId) {
+        if (getTawByPosition(place.getLeft()).getCurrentTaw() != null && getTawByPosition(place.getLeft()).getCurrentTaw().getPlayerId() == playerId) {
             //check right
-            if (place.getRight().getCurrentTaw() != null && place.getRight().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getRight()).getCurrentTaw() != null && getTawByPosition(place.getRight()).getCurrentTaw().getPlayerId() == playerId)
                 return true;
         }
 
@@ -412,14 +473,14 @@ public class Game_Page_Activity extends AppCompatActivity {
     }
 
     public boolean top_down_right(TawPlace place, int playerId) {
-        if (place.getRight().getCurrentTaw() != null && place.getRight().getCurrentTaw().getPlayer().getId() == playerId) {
+        if (getTawByPosition(place.getRight()).getCurrentTaw() != null && getTawByPosition(place.getRight()).getCurrentTaw().getPlayerId() == playerId) {
             //check right
-            if (place.getRight().getRight().getCurrentTaw() != null && place.getRight().getRight().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getRight()).getRight()).getCurrentTaw().getPlayerId() == playerId)
                 return true;
         }
-        if (place.getTop().getCurrentTaw() != null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId) {
+        if (getTawByPosition(place.getTop()).getCurrentTaw() != null && getTawByPosition(place.getTop()).getCurrentTaw().getPlayerId() == playerId) {
             //check down
-            if (place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getDown()).getCurrentTaw() != null && getTawByPosition(place.getDown()).getCurrentTaw().getPlayerId() == playerId)
                 return true;
         }
 
@@ -427,14 +488,14 @@ public class Game_Page_Activity extends AppCompatActivity {
     }
 
     public boolean top_down_left(TawPlace place, int playerId) {
-        if (place.getLeft().getCurrentTaw() != null && place.getLeft().getCurrentTaw().getPlayer().getId() == playerId) {
+        if (getTawByPosition(place.getLeft()).getCurrentTaw() != null && getTawByPosition(place.getLeft()).getCurrentTaw().getPlayerId() == playerId) {
             //check left
-            if (place.getLeft().getLeft().getCurrentTaw() != null && place.getLeft().getLeft().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw() != null && getTawByPosition(getTawByPosition(place.getLeft()).getLeft()).getCurrentTaw().getPlayerId() == playerId)
                 return true;
         }
-        if (place.getTop().getCurrentTaw() != null && place.getTop().getCurrentTaw().getPlayer().getId() == playerId) {
+        if (getTawByPosition(place.getTop()).getCurrentTaw() != null && getTawByPosition(place.getTop()).getCurrentTaw().getPlayerId() == playerId) {
             //check down
-            if (place.getDown().getCurrentTaw() != null && place.getDown().getCurrentTaw().getPlayer().getId() == playerId)
+            if (getTawByPosition(place.getDown()).getCurrentTaw() != null && getTawByPosition(place.getDown()).getCurrentTaw().getPlayerId() == playerId)
                 return true;
         }
 
@@ -462,7 +523,90 @@ public class Game_Page_Activity extends AppCompatActivity {
         return position;
     }
 
-    public int getItemColor(View view) {
-        return (int) view.getTag();
+
+    public int getDarkColors(int color) {
+
+        if (Color.parseColor("#65FA32") == color)
+            return Color.parseColor("#285C03");
+        if (Color.parseColor("#FF0026") == color)
+            return Color.parseColor("#5C0311");
+        if (Color.parseColor("#4DB2F6") == color)
+            return Color.parseColor("#023353");
+        return 0;
     }
+
+    public int getBrightColors(int color) {
+
+        if (Color.parseColor("#285C03") == color)
+            return Color.parseColor("#65FA32");
+        if (Color.parseColor("#5C0311") == color)
+            return Color.parseColor("#FF0026");
+        if (Color.parseColor("#023353") == color)
+            return Color.parseColor("#4DB2F6");
+        return 0;
+    }
+
+
+    public void addIdOfButtonsToList() {
+        ids.add(R.id.btn0_0);
+        ids.add(R.id.btn0_3);
+        ids.add(R.id.btn0_6);
+        ids.add(R.id.btn1_1);
+        ids.add(R.id.btn1_3);
+        ids.add(R.id.btn1_5);
+        ids.add(R.id.btn2_2);
+        ids.add(R.id.btn2_3);
+        ids.add(R.id.btn2_4);
+        ids.add(R.id.btn3_0);
+        ids.add(R.id.btn3_1);
+        ids.add(R.id.btn3_2);
+        ids.add(R.id.btn3_4);
+        ids.add(R.id.btn3_5);
+        ids.add(R.id.btn3_6);
+        ids.add(R.id.btn4_2);
+        ids.add(R.id.btn4_3);
+        ids.add(R.id.btn4_4);
+        ids.add(R.id.btn5_1);
+        ids.add(R.id.btn5_3);
+        ids.add(R.id.btn5_5);
+        ids.add(R.id.btn6_0);
+        ids.add(R.id.btn6_3);
+        ids.add(R.id.btn6_6);
+
+    }
+
+
+    public void enableTheRivalTaw(boolean flag) {
+        int currentColor;
+        // if flag == true delete taw of second player taw list else delete taw of first player taw list
+        if (flag) {
+            currentColor = secondPlayerColor;
+        } else {
+            currentColor = firstPlayerColor;
+        }
+        convertedColor = getDarkColors(currentColor);
+        ids.forEach(integer -> {
+            if ((int) findViewById(integer).getTag() == (currentColor)) {
+                findViewById(integer).setBackgroundColor(convertedColor);
+            }
+        });
+
+    }
+
+    public void disableTheRivalTaw() {
+        ids.forEach(integer -> {
+            if ((int) findViewById(integer).getTag() == (convertedColor)) {
+                findViewById(integer).setBackgroundColor(getBrightColors(convertedColor));
+            }
+        });
+    }
+
+    public TawPlace getTawByPosition(Position position){
+
+        return places[position.getY()][position.getX()];
+    }
+
+
+
+
 }
