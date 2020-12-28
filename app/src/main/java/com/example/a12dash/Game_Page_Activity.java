@@ -8,17 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.a12dash.models.player.Player;
 import com.example.a12dash.models.player.PlayerState;
 import com.example.a12dash.models.taw.PlayGround;
 import com.example.a12dash.models.taw.Position;
-import com.example.a12dash.models.taw.Taw;
 import com.example.a12dash.models.taw.TawCondition;
 import com.example.a12dash.models.taw.TawPlace;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -59,37 +55,37 @@ public class Game_Page_Activity extends AppCompatActivity {
         firstPlayerColor = b.getInt("firstPlayerColor");
         secondPlayerColor = b.getInt("secondPlayerColor");
 
-        TextView txtfirstPlayerName= findViewById(R.id.txtfirstPlayerName);
+        TextView txtfirstPlayerName = findViewById(R.id.txtfirstPlayerName);
         txtfirstPlayerName.setText(b.getString("firstPlayerName"));
 
         TextView txtfirstPlayerInHandTawsNumber = findViewById(R.id.txtfirstPlayerInHandTawsNumber);
-        txtfirstPlayerInHandTawsNumber.setText("taws in hand :"+"\n"+playerFirst.getTawList().size());
+        txtfirstPlayerInHandTawsNumber.setText("taws in hand :" + "\n" + playerFirst.getTawList().size());
 
-        TextView txtfirstPlayerOutTawsNumber =  findViewById(R.id.txtfirstPlayerOutTawsNumber);
-        txtfirstPlayerOutTawsNumber.setText("out taws :"+"\n"+0);
+        TextView txtfirstPlayerOutTawsNumber = findViewById(R.id.txtfirstPlayerOutTawsNumber);
+        txtfirstPlayerOutTawsNumber.setText("out taws :" + "\n" + 0);
 
-       TextView txtSecondPlayerName=findViewById(R.id.txtsecondPlayerName);
-       txtSecondPlayerName.setText(b.getString("secondPlayerName"));
+        TextView txtSecondPlayerName = findViewById(R.id.txtsecondPlayerName);
+        txtSecondPlayerName.setText(b.getString("secondPlayerName"));
 
-       TextView txtsecondPlayerInHandTawsNumber = findViewById(R.id.txtsecondPlayerInHandTawsNumber);
-       txtsecondPlayerInHandTawsNumber.setText("taws in hand "+"\n"+playerSecond.getTawList().size());
+        TextView txtsecondPlayerInHandTawsNumber = findViewById(R.id.txtsecondPlayerInHandTawsNumber);
+        txtsecondPlayerInHandTawsNumber.setText("taws in hand " + "\n" + playerSecond.getTawList().size());
 
-        TextView txtsecondPlayerOutTawsNumber= findViewById(R.id.txtsecondPlayerOutTawsNumber);
-        txtsecondPlayerOutTawsNumber.setText("out taws :"+"\n"+0);
+        TextView txtsecondPlayerOutTawsNumber = findViewById(R.id.txtsecondPlayerOutTawsNumber);
+        txtsecondPlayerOutTawsNumber.setText("out taws :" + "\n" + 0);
 
         gameStarter = b.getString("gameStarter");
 
         assert gameStarter != null;
         if (gameStarter.equals("First one")) {
             flag = true;
-           TextView txtfirstPlayerCondition=findViewById(R.id.txtfirstPalyerCondition);
-           txtfirstPlayerCondition.setText(PlayerState.MY_TURN.name());
-           TextView txtsecondPalyerCondition= findViewById(R.id.txtsecondPalyerCondition);
-           txtsecondPalyerCondition.setText(PlayerState.WAITING.name());
-        }else {
-            TextView txtfirstPlayerCondition=findViewById(R.id.txtfirstPalyerCondition);
+            TextView txtfirstPlayerCondition = findViewById(R.id.txtfirstPalyerCondition);
+            txtfirstPlayerCondition.setText(PlayerState.MY_TURN.name());
+            TextView txtsecondPalyerCondition = findViewById(R.id.txtsecondPalyerCondition);
+            txtsecondPalyerCondition.setText(PlayerState.WAITING.name());
+        } else {
+            TextView txtfirstPlayerCondition = findViewById(R.id.txtfirstPalyerCondition);
             txtfirstPlayerCondition.setText(PlayerState.WAITING.name());
-            TextView txtsecondPalyerCondition= findViewById(R.id.txtsecondPalyerCondition);
+            TextView txtsecondPalyerCondition = findViewById(R.id.txtsecondPalyerCondition);
             txtsecondPalyerCondition.setText(PlayerState.MY_TURN.name());
         }
         System.out.println(firstPlayerColor);
@@ -98,6 +94,7 @@ public class Game_Page_Activity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     public void onClick(View view) {
 
         String id = view.getResources().getResourceEntryName(view.getId());
@@ -116,6 +113,8 @@ public class Game_Page_Activity extends AppCompatActivity {
             places[position.getY()][position.getX()].setCurrentTaw(playerFirst.getTawList().get(firstPlayerTawIndex++));
             playerFirst.setNumberOfTawInGame(playerFirst.getNumberOfTawInGame() + 1);
             playerFirst.setNumberOfTawInHand(playerFirst.getNumberOfTawInHand() - 1);
+
+
             boolean goal = checkForGoal(position);
             if (goal) {
                 if (playerSecond.getNumberOfTawInHand() > 0) {
@@ -127,11 +126,14 @@ public class Game_Page_Activity extends AppCompatActivity {
                     enableTheRivalTaw(flag);
                 }
                 Toast.makeText(getApplicationContext(), "Goooaaaallllllllll", Toast.LENGTH_SHORT).show();
-
             }
-            flag = false;
-            // change game state
 
+
+            flag = false;
+
+            updateDataInGameLand();
+
+            // change game state
             if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand() == 0) {
                 changeGameStateToMoveTow();
             }
@@ -164,6 +166,9 @@ public class Game_Page_Activity extends AppCompatActivity {
 
             }
             flag = true;
+
+            updateDataInGameLand();
+
             //change game state
             if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand() == 0) {
                 changeGameStateToMoveTow();
@@ -177,6 +182,22 @@ public class Game_Page_Activity extends AppCompatActivity {
                 changeGameStateToEnterTow();
             }
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void updateDataInGameLand() {
+        TextView txtfirstPlayerInHandTawsNumber = findViewById(R.id.txtfirstPlayerInHandTawsNumber);
+        txtfirstPlayerInHandTawsNumber.setText("taws in hand :" + "\n" + playerFirst.getNumberOfTawInHand());
+
+
+        TextView txtfirstPlayerOutTawsNumber = findViewById(R.id.txtfirstPlayerOutTawsNumber);
+        txtfirstPlayerOutTawsNumber.setText("out taws :" + "\n" + playerFirst.getNumberOfTawDeleted());
+
+        TextView txtsecondPlayerInHandTawsNumber = findViewById(R.id.txtsecondPlayerInHandTawsNumber);
+        txtsecondPlayerInHandTawsNumber.setText("taws in hand " + "\n" + playerSecond.getNumberOfTawInHand());
+
+        TextView txtsecondPlayerOutTawsNumber = findViewById(R.id.txtsecondPlayerOutTawsNumber);
+        txtsecondPlayerOutTawsNumber.setText("out taws :" + "\n" + playerSecond.getNumberOfTawDeleted());
     }
 
     public void changeGameStateToMoveTow() {
@@ -488,7 +509,6 @@ public class Game_Page_Activity extends AppCompatActivity {
 
         return false;
     }
-
 
     public boolean top_left_right(TawPlace place, int playerId) {
         if (getTawByPosition(place.getTop()).getCurrentTaw() != null && getTawByPosition(place.getTop()).getCurrentTaw().getPlayerId() == playerId) {
