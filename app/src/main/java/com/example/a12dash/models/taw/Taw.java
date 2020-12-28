@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Taw {
     private int id;
-    private TawPlace place;
+    private Position place;
     private TawCondition condition = TawCondition.OUT_GAME;
-    private Player player;
+    private int playerId;
 }

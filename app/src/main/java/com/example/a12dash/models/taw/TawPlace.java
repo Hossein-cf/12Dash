@@ -7,13 +7,13 @@ public class TawPlace {
     private Taw currentTaw ;
     private TawPlaceCondition condition;
     private Position position;
-    private TawPlace top;
-    private TawPlace down;
-    private TawPlace right;
-    private TawPlace left;
-    private TawPlace S_E;
-    private TawPlace S_W;
-    private TawPlace N_W;
-    private TawPlace N_E;
+    private Position top;
+    private Position down;
+    private Position right;
+    private Position left;
+    private Position S_E;
+    private Position S_W;
+    private Position N_W;
+    private Position N_E;
 
 }
