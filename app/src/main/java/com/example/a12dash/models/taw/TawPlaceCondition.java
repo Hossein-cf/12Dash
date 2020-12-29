@@ -1,6 +1,6 @@
 package com.example.a12dash.models.taw;
 
-enum  TawPlaceCondition {
+public enum  TawPlaceCondition {
     EMPTY(0),
     FULL(1);
     public int value;

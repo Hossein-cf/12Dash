@@ -660,5 +660,288 @@ public class Game_Page_Activity extends AppCompatActivity {
         return places[position.getY()][position.getX()];
     }
 
+    public void findWay (TawPlace tawPlaces){
 
-}
+        if (tawPlaces.getPosition().getX()==0&&tawPlaces.getPosition().getY()==0){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+
+        }
+        else if(tawPlaces.getPosition().getX()==0&&tawPlaces.getPosition().getY()==3) {
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0) {
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0) {
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0) {
+                //TODO
+            }
+
+        }
+        else if (tawPlaces.getPosition().getX()==0&&tawPlaces.getPosition().getY()==6){
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+
+        }
+        else if (tawPlaces.getPosition().getX()==1&&tawPlaces.getPosition().getY()==1){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getN_W()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getS_E()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==1&&tawPlaces.getPosition().getY()==3){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==1&&tawPlaces.getPosition().getY()==5){
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getS_W()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getN_E()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==2&&tawPlaces.getPosition().getY()==2){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getN_W()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==2&&tawPlaces.getPosition().getY()==3){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==2&&tawPlaces.getPosition().getY()==4){
+            if (getTawByPosition(tawPlaces.getLeft()).getCurrentTaw().getId()==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getS_E()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==3&&tawPlaces.getPosition().getY()==0){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==3&&tawPlaces.getPosition().getY()==1){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==3&&tawPlaces.getPosition().getY()==2){
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==3&&tawPlaces.getPosition().getY()==4){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==3&&tawPlaces.getPosition().getY()==5){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==3&&tawPlaces.getPosition().getY()==6){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==4&&tawPlaces.getPosition().getY()==2){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getS_W()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==4&&tawPlaces.getPosition().getY()==3){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==4&&tawPlaces.getPosition().getY()==4){
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getS_E()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==5&&tawPlaces.getPosition().getY()==1){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getS_W()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getN_E()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==5&&tawPlaces.getPosition().getY()==3){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getDown()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==5&&tawPlaces.getPosition().getY()==5){
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getN_W()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getS_E()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==6&&tawPlaces.getPosition().getY()==0){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==6&&tawPlaces.getPosition().getY()==3){
+            if (getTawByPosition(tawPlaces.getRight()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+        }
+        else if (tawPlaces.getPosition().getX()==6&&tawPlaces.getPosition().getY()==6){
+            if (getTawByPosition(tawPlaces.getTop()).getCondition().value==0){
+                //TODO
+            }
+            if (getTawByPosition(tawPlaces.getLeft()).getCondition().value==0){
+                //TODO
+            }
+        }
+
+
+
+}}
