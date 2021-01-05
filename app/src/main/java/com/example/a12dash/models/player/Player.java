@@ -18,6 +18,7 @@ public class Player {
     private int numberOfTawInGame=0;
     private int numberOfTawInHand =12;
     private int numberOfTawDeleted=0;
+    private GameStateForPlayer gameStateForPlayer = GameStateForPlayer.ENTER_TAW;
     public Player(int id){
          this.id = id;
 
