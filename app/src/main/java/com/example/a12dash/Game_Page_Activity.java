@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -110,18 +111,34 @@ public class Game_Page_Activity extends AppCompatActivity {
         String id = view.getResources().getResourceEntryName(view.getId());
         Position position = getTowSelectedPosition(id);
 
+        if (flag) {
+            // enter taw to play ground
+            if (playerFirst.getGameStateForPlayer().value == GameStateForPlayer.ENTER_TAW.value) {
+                if (view.getTag().toString().contains("#ADAD85") && playerFirst.getNumberOfTawInHand() > 0) {
+                    firstPlayerPlay(view, position);
+                    if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand() == 0 ) {
+                        enableThePlayerTaw(playerSecond);
+                        disableThePlayerTaw(playerFirst);
+                    }
+                }
+            } else if (playerFirst.getGameStateForPlayer().value == GameStateForPlayer.MOVE_TAW.value) {
 
-
-        // enter taw to play ground
-        if (playerFirst.getGameStateForPlayer().value == GameStateForPlayer.ENTER_TAW.value && playerSecond.getGameStateForPlayer().value == GameStateForPlayer.ENTER_TAW.value) {
-            if (flag && view.getTag().toString().contains("#ADAD85") && playerFirst.getNumberOfTawInHand() > 0) {
-                firstPlayerPlay(view, position);
-                return;
-            } else if (view.getTag().toString().contains("#ADAD85") && playerSecond.getNumberOfTawInHand() > 0) {
-                secondPlayerPlay(view, position);
-                return;
+                moving(position);
             }
+        } else {
+            if (playerSecond.getGameStateForPlayer().value == GameStateForPlayer.ENTER_TAW.value) {
+                if (view.getTag().toString().contains("#ADAD85") && playerSecond.getNumberOfTawInHand() > 0) {
+                    secondPlayerPlay(view, position);
+                    if (playerSecond.getNumberOfTawInHand() == 0 && playerFirst.getNumberOfTawInHand() == 0 ) {
+                        enableThePlayerTaw(playerFirst);
+                        disableThePlayerTaw(playerSecond);
+                    }
+                }
+            } else if (playerSecond.getGameStateForPlayer().value == GameStateForPlayer.MOVE_TAW.value) {
 
+                moving(position);
+
+            }
         }
         if (gameState == GameState.DELETE_TAW.value) {
             Toast.makeText(getApplicationContext(), "choose another taw", Toast.LENGTH_SHORT).show();
@@ -131,46 +148,16 @@ public class Game_Page_Activity extends AppCompatActivity {
             } else {
                 changeGameStateToEnterTow();
             }
-            return;
-        }
-        if (playerFirst.getGameStateForPlayer().value == GameStateForPlayer.MOVE_TAW.value || playerSecond.getGameStateForPlayer().value == GameStateForPlayer.MOVE_TAW.value) {
-            if (chooseTheTargetTaw) {
-                target = getTawByPosition(position);
-
-                if (neighbor_places.contains(target)) {
-                    neighbor_places.forEach(tawPlace -> {
-                        String neighbor_placeName = "btn" + tawPlace.getPosition().getY() + "_" + tawPlace.getPosition().getX();
-                        String color = findViewById(ids.get(btnNames.indexOf(neighbor_placeName))).getTag().toString();
-                        findViewById(ids.get(btnNames.indexOf(neighbor_placeName))).setBackgroundColor(getBrightColors(Color.parseColor(color)));
-                        findViewById(ids.get(btnNames.indexOf(neighbor_placeName))).setTag(color);
-                    });
-                    move1(source, target);
-
-                    neighbor_places = new ArrayList<>();
-                    chooseTheTargetTaw = false;
-                }else {
-                    Toast.makeText(getApplicationContext(), "choose current place", Toast.LENGTH_SHORT).show();
-
-                }
-
-            } else {
-                source = getTawByPosition(position);
-                neighbor_places = findWay1(source);
-                neighbor_places.forEach(tawPlace -> {
-                    String neighbor_placeName = "btn" + tawPlace.getPosition().getY() + "_" + tawPlace.getPosition().getX();
-                    String color = findViewById(ids.get(btnNames.indexOf(neighbor_placeName))).getTag().toString();
-                    findViewById(ids.get(btnNames.indexOf(neighbor_placeName))).setBackgroundColor(getDarkColors(Color.parseColor(color)));
-                    findViewById(ids.get(btnNames.indexOf(neighbor_placeName))).setTag(color);
-                });
-                chooseTheTargetTaw = true;
-            }
-
 
         }
+
+        if (playerSecond.getNumberOfTawInHand() > 0 || playerFirst.getNumberOfTawInHand() > 0 ) {
+            enableTheEmptyPlaces();
+        }
+
     }
 
     public void firstPlayerPlay(View view, Position position) {
-
         findViewById(view.getId()).setBackgroundColor(firstPlayerColor);
         findViewById(view.getId()).setTag(firstPlayerColor);
 
@@ -192,23 +179,28 @@ public class Game_Page_Activity extends AppCompatActivity {
 
             } else {
                 gameState = GameState.DELETE_TAW.value;
-                enableTheRivalTaw(flag);
+//                enableTheRivalTaw(flag);
+                //todo
             }
             Toast.makeText(getApplicationContext(), "Goooaaaallllllllll", Toast.LENGTH_SHORT).show();
+        } else {
+            flag = false;
         }
-
-
-        flag = false;
-
         updateDataInGameLand();
 
         // change game state
         if (playerFirst.getNumberOfTawInHand() == 0) {
             playerFirst.setGameStateForPlayer(GameStateForPlayer.MOVE_TAW);
+            disableTheEmptyPlaces();
+        }
+        if (playerSecond.getNumberOfTawInHand() == 0) {
+            playerSecond.setGameStateForPlayer(GameStateForPlayer.MOVE_TAW);
+            disableTheEmptyPlaces();
         }
     }
 
     public void secondPlayerPlay(View view, Position position) {
+
         findViewById(view.getId()).setBackgroundColor(secondPlayerColor);
         findViewById(view.getId()).setTag(secondPlayerColor);
 
@@ -230,20 +222,72 @@ public class Game_Page_Activity extends AppCompatActivity {
                 playerFirst.setNumberOfTawInHand(playerFirst.getNumberOfTawInHand() - 1);
             } else {
                 gameState = GameState.DELETE_TAW.value;
-                enableTheRivalTaw(flag);
+//                enableTheRivalTaw(flag);
                 //TODO enable the button for delete
             }
             Toast.makeText(getApplicationContext(), "Goooaaaallllllllll", Toast.LENGTH_SHORT).show();
 
+        } else {
+            flag = true;
         }
-        flag = true;
-
         updateDataInGameLand();
 
         //change game state
         if (playerSecond.getNumberOfTawInHand() == 0) {
+            disableTheEmptyPlaces();
             playerSecond.setGameStateForPlayer(GameStateForPlayer.MOVE_TAW);
         }
+        if (playerFirst.getNumberOfTawInHand() == 0) {
+            playerFirst.setGameStateForPlayer(GameStateForPlayer.MOVE_TAW);
+            disableTheEmptyPlaces();
+        }
+    }
+
+    public void moving(Position position) {
+        if (chooseTheTargetTaw) {
+            target = getTawByPosition(position);
+
+            if (neighbor_places.contains(target)) {
+                neighbor_places.forEach(tawPlace -> {
+                    String neighbor_placeName = "btn" + tawPlace.getPosition().getY() + "_" + tawPlace.getPosition().getX();
+                    String color = findViewById(ids.get(btnNames.indexOf(neighbor_placeName))).getTag().toString();
+                    findViewById(ids.get(btnNames.indexOf(neighbor_placeName))).setBackgroundColor(getBrightColors(Color.parseColor(color)));
+                    findViewById(ids.get(btnNames.indexOf(neighbor_placeName))).setTag(color);
+                });
+                move1(source, target);
+
+                neighbor_places = new ArrayList<>();
+                chooseTheTargetTaw = false;
+                if (flag) {
+                    enableThePlayerTaw(playerSecond);
+                    disableThePlayerTaw(playerFirst);
+                    flag = false;
+                } else {
+                    enableThePlayerTaw(playerFirst);
+                    disableThePlayerTaw(playerSecond);
+                    flag = true;
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "choose current place", Toast.LENGTH_SHORT).show();
+
+            }
+
+        } else {
+            //تغییر رنگ خانه های همسایه قابل حرکت بر روی آن ها
+            source = getTawByPosition(position);
+            neighbor_places = findWay1(source);
+            neighbor_places.forEach(tawPlace -> {
+
+                String neighbor_placeName = "btn" + tawPlace.getPosition().getY() + "_" + tawPlace.getPosition().getX();
+                int index = btnNames.indexOf(neighbor_placeName);
+                String color = findViewById(ids.get(index)).getTag().toString();
+                findViewById(ids.get(index)).setBackgroundColor(getDarkColors(Color.parseColor(color)));
+                findViewById(ids.get(index)).setEnabled(true);
+                findViewById(ids.get(index)).setTag(color);
+            });
+            chooseTheTargetTaw = true;
+        }
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -617,24 +661,6 @@ public class Game_Page_Activity extends AppCompatActivity {
         return false;
     }
 
-    public void autoPlay() {
-        /*TODO
-        بررسی احتمال دوز زدن حرف
-        جاوگیری از دوز زدن حریف
-         جاوگیری از دوز زدن حریف و ایجاد دوز یک طرفه
-         جاوگیری از دوز زدن حریف و ایجاد دوز دو طرفه
-         جاوگیری از دوز زدن حریف و ایجاد دوز سه طرفه
-         جاوگیری از دوز زدن حریف و زدن دوز
-         */
-    }
-
-    public void attack() {
-        //TODO
-    }
-
-    public void defend() {
-        //TODO
-    }
 
     public Position getTowSelectedPosition(String id) {
         Position position = new Position();
@@ -703,36 +729,74 @@ public class Game_Page_Activity extends AppCompatActivity {
         });
     }
 
-    public void enableTheRivalTaw(boolean flag) {
-        int currentColor;
-        // if flag == true delete taw of second player taw list else delete taw of first player taw list
-        if (flag) {
-            currentColor = secondPlayerColor;
-        } else {
-            currentColor = firstPlayerColor;
-        }
-        convertedColor = getDarkColors(currentColor);
-        ids.forEach(integer -> {
-            if ((int) findViewById(integer).getTag() == (currentColor)) {
-                findViewById(integer).setBackgroundColor(convertedColor);
+    public void disableTheEmptyPlaces() {
+
+        ids.forEach(id -> {
+            Button button = findViewById(id);
+            if (button.getTag().toString().contains("#ADAD85")) {
+                button.setEnabled(false);
             }
         });
 
     }
 
-    public void disableTheRivalTaw() {
-        ids.forEach(integer -> {
-            if ((int) findViewById(integer).getTag() == (convertedColor)) {
-                findViewById(integer).setBackgroundColor(getBrightColors(convertedColor));
+    public void enableTheEmptyPlaces() {
+
+        ids.forEach(id -> {
+            Button button = findViewById(id);
+            if (button.getTag().toString().contains("#ADAD85")) {
+                button.setEnabled(true);
             }
         });
     }
+
+    public void disableThePlayerTaw(Player player){
+
+        player.getTawList().forEach(taw -> {
+            Position position =taw.getPlace();
+            String placeName = "btn"+position.getY()+"_"+position.getX();
+            findViewById(ids.get(btnNames.indexOf(placeName))).setEnabled(false);
+        });
+
+    }
+    public void enableThePlayerTaw(Player player){
+
+        player.getTawList().forEach(taw -> {
+            Position position =taw.getPlace();
+            String placeName = "btn"+position.getY()+"_"+position.getX();
+            findViewById(ids.get(btnNames.indexOf(placeName))).setEnabled(true);
+        });
+
+    }
+//    public void enableTheRivalTaw(boolean flag) {
+//        int currentColor;
+//        // if flag == true delete taw of second player taw list else delete taw of first player taw list
+//        if (flag) {
+//            currentColor = secondPlayerColor;
+//        } else {
+//            currentColor = firstPlayerColor;
+//        }
+//        convertedColor = getDarkColors(currentColor);
+//        ids.forEach(integer -> {
+//            if ((int) findViewById(integer).getTag() == (currentColor)) {
+//                findViewById(integer).setBackgroundColor(convertedColor);
+//            }
+//        });
+//
+//    }
+
+//    public void disableTheRivalTaw() {
+//        ids.forEach(integer -> {
+//            if ((int) findViewById(integer).getTag() == (convertedColor)) {
+//                findViewById(integer).setBackgroundColor(getBrightColors(convertedColor));
+//            }
+//        });
+//    }
 
     public TawPlace getTawByPosition(Position position) {
 
         return places[position.getY()][position.getX()];
     }
-
 
     public List<TawPlace> findWay1(TawPlace tawPlaces) {
         List<TawPlace> placeList = new ArrayList<>();
@@ -773,16 +837,23 @@ public class Game_Page_Activity extends AppCompatActivity {
 
     public void move1(TawPlace source, TawPlace target) {
         //change the taw from source to target place
-        places[source.getPosition().getY()][source.getPosition().getX()].setCurrentTaw(null);
+        int color = 0;
+        if (flag) {
+            color = firstPlayerColor;
+
+        } else {
+            color = secondPlayerColor;
+        }
         places[target.getPosition().getY()][target.getPosition().getX()].setCurrentTaw(source.getCurrentTaw());
+        places[source.getPosition().getY()][source.getPosition().getX()].setCurrentTaw(null);
 
 
-        target.setCurrentTaw(source.getCurrentTaw());
-        source.setCurrentTaw(null);
+//        target.setCurrentTaw(source.getCurrentTaw());
+//        source.setCurrentTaw(null);
         String nameTarget = "btn" + target.getPosition().getY() + "_" + target.getPosition().getX();
         int idTarget = ids.get(btnNames.indexOf(nameTarget));
-        findViewById(idTarget).setBackgroundColor(firstPlayerColor);
-        findViewById(idTarget).setTag(firstPlayerColor);
+        findViewById(idTarget).setBackgroundColor(color);
+        findViewById(idTarget).setTag(color);
 
         String nameSource = "btn" + source.getPosition().getY() + "_" + source.getPosition().getX();
         int idSource = ids.get(btnNames.indexOf(nameSource));
