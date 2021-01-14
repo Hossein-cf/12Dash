@@ -69,22 +69,6 @@ public class activity_fill_information extends AppCompatActivity {
             }
         });
 
-//        Bundle b = getIntent().getExtras();
-//        TextView txtName = findViewById(R.id.txtxNameFirst);
-//        String GameType = b.get("Game_Type").toString();
-//        System.out.println(GameType);
-//        if (GameType.equals("SinglePlayer")) {
-//            txtName.setText("system");
-//
-//        }
-//        Button btnStart = findViewById(R.id.btnStart);
-//        btnStart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), Game_Page_Activity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
 

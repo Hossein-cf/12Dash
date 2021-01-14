@@ -21,20 +21,7 @@ public class MinMaxAlgorithm {
         this.ground = ground;
     }
 
-//    static int minMax(int depth, TawPlace place, boolean isMax, int playerId) {
-//        // Terminating condition. i.e leaf node is reached
-//
-//        // If current move is maximizer, find the maximum attainable
-//        // value
-//        if (isMax) {
-//
-//        }
-//        // Else (If current move is Minimizer), find the minimum
-//        // attainable value
-//        else {
-//        }
-//        return 0;
-//    }
+
 
     public TawPlace getBestWay(TawPlace[][] ground , GameStateForPlayer state , View view) {
         int bestScore = -20;
@@ -84,21 +71,6 @@ public class MinMaxAlgorithm {
 
         }
 
-//         if (state.value == GameStateForPlayer.DELETE_TAW.value){
-//             List<TawPlace> placeList = new ArrayList<>();
-//             for (int y = 0; y < 7; y++) {
-//                 for (int x = 0; x < 7; x++) {
-//                     if (ground[y][x] != null && ground[y][x].getCurrentTaw() != null) {
-//                         if (ground[y][x].getCurrentTaw().getPlayerId()==2){
-//                             placeList.add(ground[y][x]);
-//                         }
-//                     }
-//                 }
-//             }
-//             int randomIndexForDelete = new Random().nextInt(placeList.size());
-//             TawPlace deletedPlace= placeList.get(randomIndexForDelete);
-//             new DeleteTaw().deleteTaw(view,1,deletedPlace.getPosition());
-//        }
 
 
 
@@ -740,18 +712,18 @@ public class MinMaxAlgorithm {
     }
 }
 
-
-enum Utility {
-    GOAL(1),
-    DEFENSE(1),
-    TWINS_1(0.2),
-    TWINS_2(0.5),
-    TWINS_3(0.7),
-    NONE(0);
-
-    public double value;
-
-    private Utility(double value) {
-        this.value = value;
-    }
-}
+//
+//enum Utility {
+//    GOAL(1),
+//    DEFENSE(1),
+//    TWINS_1(0.2),
+//    TWINS_2(0.5),
+//    TWINS_3(0.7),
+//    NONE(0);
+//
+//    public double value;
+//
+//    private Utility(double value) {
+//        this.value = value;
+//    }
+//}

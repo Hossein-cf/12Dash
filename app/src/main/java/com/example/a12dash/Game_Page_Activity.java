@@ -231,9 +231,7 @@ public class Game_Page_Activity extends AppCompatActivity {
                 playerSecond.setNumberOfTawInHand(playerSecond.getNumberOfTawInHand() - 1);
 
             } else {
-//                gameState = GameState.DELETE_TAW.value;
                 playerFirst.setGameStateForPlayer(GameStateForPlayer.DELETE_TAW);
-//                enableTheRivalTaw(flag);
                 enableThePlayerTaw(playerSecond);
                 disableThePlayerTaw(playerFirst);
 
@@ -277,10 +275,8 @@ public class Game_Page_Activity extends AppCompatActivity {
                 playerFirst.getTawList().remove(playerFirst.getTawList().size() - 1);
                 playerFirst.setNumberOfTawInHand(playerFirst.getNumberOfTawInHand() - 1);
             } else {
-//                gameState = GameState.DELETE_TAW.value;
                 playerSecond.setGameStateForPlayer(GameStateForPlayer.DELETE_TAW);
 
-//                enableTheRivalTaw(flag);
                 enableThePlayerTaw(playerFirst);
                 disableThePlayerTaw(playerSecond);
 
@@ -355,24 +351,7 @@ public class Game_Page_Activity extends AppCompatActivity {
         return false;
     }
 
-//    public void deleteTaw(Player player, Position position) {
-//        String placeName = "btn" + position.getY() + "_" + position.getX();
-//        findViewById(ids.get(btnNames.indexOf(placeName))).setBackgroundColor(Color.parseColor("#ADAD85"));
-//        findViewById(ids.get(btnNames.indexOf(placeName))).setTag("#ADAD85");
-//        findViewById(ids.get(btnNames.indexOf(placeName))).setEnabled(false);
-//        if (player.getId() == 1) {
-//            playerFirst.getTawList().removeIf(taw1 ->
-//                    taw1.getPlace().getY() == position.getY() && taw1.getPlace().getX() == position.getX()
-//            );
-//        } else {
-//            playerSecond.getTawList().removeIf(taw1 ->
-//                    taw1.getPlace().getY() == position.getY() && taw1.getPlace().getX() == position.getX()
-//            );
-//
-//        }
-//        places[position.getY()][position.getX()].setCurrentTaw(null);
-//
-//    }
+
 
     @SuppressLint("SetTextI18n")
     public void updateDataInGameLand() {
@@ -390,17 +369,6 @@ public class Game_Page_Activity extends AppCompatActivity {
         txtsecondPlayerOutTawsNumber.setText("out taws :" + "\n" + playerSecond.getNumberOfTawDeleted());
     }
 
-    public void changeGameStateToMoveTow() {
-        gameState = GameState.MOVE_TAW.value;
-    }
-
-    public void changeGameStateToDeleteTow() {
-        gameState = GameState.DELETE_TAW.value;
-    }
-
-    public void changeGameStateToEnterTow() {
-        gameState = GameState.ENTER_TAW.value;
-    }
 
 
     public Position getTowSelectedPosition(String id) {
@@ -515,44 +483,6 @@ public class Game_Page_Activity extends AppCompatActivity {
 
         return places[position.getY()][position.getX()];
     }
-
-   /* public List<TawPlace> findNeighbors(TawPlace tawPlace) {
-        List<TawPlace> placeList = new ArrayList<>();
-        if (tawPlace.getLeft() != null) {
-            if (getTawByPosition(tawPlace.getLeft()).getCurrentTaw() == null)
-                placeList.add(getTawByPosition(tawPlace.getLeft()));
-        }
-        if (tawPlace.getRight() != null) {
-            if (getTawByPosition(tawPlace.getRight()).getCurrentTaw() == null)
-                placeList.add(getTawByPosition(tawPlace.getRight()));
-        }
-        if (tawPlace.getDown() != null) {
-            if (getTawByPosition(tawPlace.getDown()).getCurrentTaw() == null)
-                placeList.add(getTawByPosition(tawPlace.getDown()));
-        }
-        if (tawPlace.getTop() != null) {
-            if (getTawByPosition(tawPlace.getTop()).getCurrentTaw() == null)
-                placeList.add(getTawByPosition(tawPlace.getTop()));
-        }
-        if (tawPlace.getS_E() != null) {
-            if (getTawByPosition(tawPlace.getS_E()).getCurrentTaw() == null)
-                placeList.add(getTawByPosition(tawPlace.getS_E()));
-        }
-        if (tawPlace.getS_W() != null) {
-            if (getTawByPosition(tawPlace.getS_W()).getCurrentTaw() == null)
-                placeList.add(getTawByPosition(tawPlace.getS_W()));
-        }
-        if (tawPlace.getN_E() != null) {
-            if (getTawByPosition(tawPlace.getN_E()).getCurrentTaw() == null)
-                placeList.add(getTawByPosition(tawPlace.getN_E()));
-        }
-        if (tawPlace.getN_W() != null) {
-            if (getTawByPosition(tawPlace.getN_W()).getCurrentTaw() == null)
-                placeList.add(getTawByPosition(tawPlace.getN_W()));
-        }
-        return placeList;
-    }*/
-
 
 
 }
