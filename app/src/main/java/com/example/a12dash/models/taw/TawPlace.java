@@ -15,5 +15,6 @@ public class TawPlace {
     private Position S_W;
     private Position N_W;
     private Position N_E;
-
+    private double utilityForSystem;
+    private double utilityForPlayer;
 }

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.12Dash">
-        <activity android:name=".testActivity"></activity>
+        <activity android:name=".testActivity" />
         <activity android:name=".activity_fill_information" />
         <activity android:name=".Game_Page_Activity" />
         <activity android:name=".MainActivity">

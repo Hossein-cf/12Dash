@@ -8,7 +8,6 @@
     <string name="second">Second</string>
 
 
-
     <string-array name="planets_array">
         <item>Mercury</item>
         <item>Venus</item>

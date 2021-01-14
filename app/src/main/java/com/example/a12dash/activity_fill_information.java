@@ -23,6 +23,9 @@ public class activity_fill_information extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fill_information);
 
+        Bundle bundle = getIntent().getExtras();
+
+        String Game_Type = bundle.getString("Game_Type");
 
         getSupportActionBar().hide();
         String[] Colors = new String[]{"Pick a Color", "Blue", "Red", "Green"};
@@ -55,11 +58,12 @@ public class activity_fill_information extends AppCompatActivity {
 
                     System.out.println(firstPlayerColorDropdown.getSelectedItem().toString());
                     Intent intent = new Intent(getApplicationContext(), Game_Page_Activity.class);
-                    intent.putExtra("firstPlayerColor",getColor(firstPlayerColorDropdown.getSelectedItem().toString()));
-                    intent.putExtra("secondPlayerColor",getColor(secondPlayerColorDropdown.getSelectedItem().toString()));
-                    intent.putExtra("firstPlayerName",txtFirstPlayerName.getText().toString());
-                    intent.putExtra("secondPlayerName",txtSecondPlayerName.getText().toString());
-                    intent.putExtra("gameStarter",playersDropdown.getSelectedItem().toString());
+                    intent.putExtra("firstPlayerColor", getColor(firstPlayerColorDropdown.getSelectedItem().toString()));
+                    intent.putExtra("secondPlayerColor", getColor(secondPlayerColorDropdown.getSelectedItem().toString()));
+                    intent.putExtra("firstPlayerName", txtFirstPlayerName.getText().toString());
+                    intent.putExtra("secondPlayerName", txtSecondPlayerName.getText().toString());
+                    intent.putExtra("gameStarter", playersDropdown.getSelectedItem().toString());
+                    intent.putExtra("Game_Type", Game_Type);
                     startActivity(intent);
                 }
             }
@@ -84,7 +88,6 @@ public class activity_fill_information extends AppCompatActivity {
     }
 
 
-
     public void alert() {
         AlertDialog.Builder alert = new AlertDialog.Builder(activity_fill_information.this);
 
@@ -99,10 +102,7 @@ public class activity_fill_information extends AppCompatActivity {
     }
 
 
-
-
-
-    public int getColor(String colorName){
+    public int getColor(String colorName) {
 
         if (colorName.equals("Green"))
             return Color.parseColor("#65FA32");
